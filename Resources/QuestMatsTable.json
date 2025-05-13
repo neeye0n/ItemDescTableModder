@@ -1,0 +1,212 @@
+{
+  "Anubis Helm": [
+    {
+      "matId": 7211,
+      "qty": 3
+    },
+    {
+      "matId": 7113,
+      "qty": 3
+    },
+    {
+      "matId": 4138,
+      "qty": 1
+    },
+    {
+      "matId": 1009,
+      "qty": 1
+    },
+    {
+      "matId": 1045,
+      "qty": 500
+    }
+  ],
+  "Benevolent Guardian": [
+    {
+      "matId": 2217,
+      "qty": 1
+    },
+    {
+      "matId": 2206,
+      "qty": 1
+    },
+    {
+      "matId": 2626,
+      "qty": 1
+    },
+    {
+      "matId": 7153,
+      "qty": 50
+    }
+  ],
+  "Hunting Cap": [
+    {
+      "matId": 5108,
+      "qty": 1
+    },
+    {
+      "matId": 919,
+      "qty": 1000
+    },
+    {
+      "matId": 948,
+      "qty": 500
+    },
+    {
+      "matId": 979,
+      "qty": 1
+    },
+    {
+      "matId": 2285,
+      "qty": 1
+    }
+  ],
+  "Lunatic Hat": [
+    {
+      "matId": 710,
+      "qty": 3
+    },
+    {
+      "matId": 704,
+      "qty": 3
+    },
+    {
+      "matId": 703,
+      "qty": 3
+    },
+    {
+      "matId": 905,
+      "qty": 500
+    },
+    {
+      "matId": 906,
+      "qty": 500
+    },
+    {
+      "matId": 4006,
+      "qty": 1
+    }
+  ],
+  "Witch Pumpkin Hat": [
+    {
+      "matId": 1233,
+      "qty": 1
+    },
+    {
+      "matId": 7019,
+      "qty": 1
+    },
+    {
+      "matId": 2252,
+      "qty": 10
+    },
+    {
+      "matId": 1000,
+      "qty": 100
+    },
+    {
+      "matId": 7225,
+      "qty": 100
+    },
+    {
+      "matId": 4111,
+      "qty": 1
+    }
+  ],
+  "Alice Doll": [
+    {
+      "matId": 5170,
+      "qty": 1
+    },
+    {
+      "matId": 661,
+      "qty": 3
+    },
+    {
+      "matId": 2256,
+      "qty": 1
+    },
+    {
+      "matId": 4035,
+      "qty": 1
+    }
+  ],
+  "Telling Doll": [
+    {
+      "matId": 5170,
+      "qty": 1
+    },
+    {
+      "matId": 661,
+      "qty": 3
+    },
+    {
+      "matId": 740,
+      "qty": 10
+    },
+    {
+      "matId": 2417,
+      "qty": 1
+    }
+  ],
+  "Tam": [
+    {
+      "matId": 1604,
+      "qty": 1
+    },
+    {
+      "matId": 7166,
+      "qty": 25
+    },
+    {
+      "matId": 5120,
+      "qty": 1
+    },
+    {
+      "matId": 4023,
+      "qty": 1
+    }
+  ],
+  "Koneko Hat": [
+    {
+      "matId": 1006,
+      "qty": 1
+    },
+    {
+      "matId": 7206,
+      "qty": 150
+    },
+    {
+      "matId": 982,
+      "qty": 5
+    }
+  ],
+  "Lif Doll": [
+    {
+      "matId": 520,
+      "qty": 100
+    },
+    {
+      "matId": 7100,
+      "qty": 100
+    },
+    {
+      "matId": 5141,
+      "qty": 1
+    }
+  ],
+  "Chick Hat": [
+    {
+      "matId": 574,
+      "qty": 1
+    },
+    {
+      "matId": 916,
+      "qty": 100
+    },
+    {
+      "matId": 508,
+      "qty": 25
+    }
+  ]
+}
