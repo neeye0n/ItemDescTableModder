@@ -1,6 +1,6 @@
 # ItemDescTableModder
 
-Simple tool to modify the item description table `itemInfo_EN.lua` of Ragnarok Online.
+Simple tool to modify the client-side item description table `itemInfo_EN.lua` for Ragnarok Online.
 
 ## Usage
 ![Usage](Misc/Doc/how-to-use.gif)
