@@ -1,23 +1,46 @@
 # ItemDescTableModder
 
-Simple tool to modify the client-side item description table `itemInfo_EN.lua` for Ragnarok Online.
+A simple tool for customizing item descriptions in `itemInfo_EN.lua` for **Ragnarok Online**.
 
-## Usage
+This lets you add helpful tags and details to item names and descriptions to make crafting, questing, and instance runs more convenient.
+
+---
+
+## 📦 How to Use
+
 ![Usage](Misc/Doc/how-to-use.gif)
 
-Click and drag existing `itemInfo_EN.lua` onto the executable.
-This will create a `System` folder containg a new `itemInfo_EN.lua` with the modified descriptions.
+1. **Make a backup of your current `itemInfo_EN.lua` file**, just in case you want to restore it later.  
+   _(Usually found in `RagnarokFolder/System`.)_
+2. Drag and drop the original `itemInfo_EN.lua` file onto the `ItemDescTableModder` program.  
+   _(Simply drag the file onto the tool’s icon.)_
+3. The tool will generate a new **System** folder containing the updated `itemInfo_EN.lua`.
+4. Copy the new **System** folder into your **Ragnarok Online** game directory.
+5. If you're asked to overwrite files, click **Yes**.
 
-## Features
-### Display Name:
-- All Potion Making & Poison Bottle Mats (based from RMS Creation DB) - Prefixed with `[Brew]`
-- Lv7~10 Stat Foods Materials - Prefixed with `[Cook]`
-- Quest Hats from Crafter NPC - Prexed with `[Quest]`
-- All Instance MVPs from wiki - Suffixed with `({mvpname} - {required quantity})` *example: `Steel (Vesper - 5)`*
+✅ That’s it! Launch the game and enjoy the updated item descriptions.
 
-### Description:
-- Item ID - Displays Item Ids
-- Brewing Materials `[Brewing Material]`
-- Cooking Materials `[Cooking Material]` listing down related foods
-- Quest Materials `[Quest Material]` listing down related quest hats
-- Instance Materials `[Instance Material]` listing down related Mvp Instances
+---
+
+## ✨ Features
+
+### 🏷️ Item Name Modifications
+- `[Brew]` — for materials used in Potion/Poison creation (based on RMS Creation DB)
+- `[Cook]` — for Lv7–10 stat food ingredients
+- `[Quest]` — for server-exclusive quest item crafting materials
+- `({MVP Name} - {Qty})` — instance-related items now include the MVP name and quantity  
+  _Example: `Steel (Vesper - 5)`_
+
+### 📝 Description Additions
+- **Item ID** — now displayed for easy reference
+- `[Brewing Material]` — for crafting ingredients
+- `[Cooking Material]` — with a list of related stat foods
+- `[Quest Material]` — with the names of related server-exclusive quest items
+- `[Instance Material]` — listing relevant MVP instances where it’s needed
+
+---
+
+🛡️ **Tip:** Always keep a copy of the original file before replacing it — in case anything goes wrong or you want to switch back.
+
+Enjoy a more organized and informative Ragnarok item database!  
+Feel free to contribute or suggest improvements.
