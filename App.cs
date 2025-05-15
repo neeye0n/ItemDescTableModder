@@ -207,14 +207,14 @@ namespace ItemDescTableModder
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
-                _logger.LogInformation("Directory created: {folderPath}", folderPath);
+                _logger.LogInformation("System Directory created");
             }
 
             if (File.Exists(fullFilePath))
             {
                 // Delete the existing file
                 File.Delete(fullFilePath);
-                _logger.LogInformation("Existing file deleted: {fullFilePath}", fullFilePath);
+                _logger.LogInformation("Existing file deleted");
             }
 
             return fullFilePath;

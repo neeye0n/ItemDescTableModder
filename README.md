@@ -3,6 +3,8 @@
 Simple tool to modify the item description table `itemInfo_EN.lua` of Ragnarok Online.
 
 ## Usage
+![Usage](Misc/Doc/how-to-use.gif)
+
 Click and drag existing `itemInfo_EN.lua` onto the executable.
 This will create a `System` folder containg a new `itemInfo_EN.lua` with the modified descriptions.
 
