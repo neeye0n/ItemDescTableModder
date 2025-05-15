@@ -1,7 +1,10 @@
-﻿using ItemDescTableModder.Services;
+﻿using ItemDescTableModder.Models;
+using ItemDescTableModder.Services;
 using ItemDescTableModder.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Text.Json;
 
 namespace ItemDescTableModder
 {
@@ -10,15 +13,20 @@ namespace ItemDescTableModder
         static void Main(string[] args)
         {
             string executableDirectory = Environment.CurrentDirectory;
+            string configPath = Path.Combine(executableDirectory, $"{typeof(Program).Namespace}.conf");
+
+            // Load or create config
+            Config config = LoadOrCreateConfig(configPath);
+
             // Setup DI
             var serviceProvider = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
+                .AddSingleton(Options.Create(config))
                 .AddSingleton<IApp, App>()
                 .AddSingleton(executableDirectory)
                 .AddScoped<ILuaTableHandler, LuaTableHandler>()
                 .AddScoped<ILuaTableModifier, LuaTableModifier>()
                 .AddScoped<ILuaTableSerializer, LuaTableSerializer>()
-
                 .BuildServiceProvider();
 
             // Get service
@@ -51,5 +59,31 @@ namespace ItemDescTableModder
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
+
+        private static Config LoadOrCreateConfig(string configPath)
+        {
+            if (!File.Exists(configPath))
+            {
+                // Create a default config
+                var defaultConfig = new Config();
+                string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(configPath, json);
+                return defaultConfig;
+            }
+
+            try
+            {
+                // Load existing config
+                string json = File.ReadAllText(configPath);
+                var config = JsonSerializer.Deserialize<Config>(json);
+                return config ?? new Config();
+            }
+            catch (Exception)
+            {
+                // If there's an error, return default config
+                return new Config();
+            }
+        }
+
     }
 }

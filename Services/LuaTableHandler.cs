@@ -5,14 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace ItemDescTableModder.Services
 {
-    public class LuaTableHandler : LuaServiceBase, ILuaTableHandler
+    public class LuaTableHandler(ILuaTableSerializer serializer) : LuaServiceBase(), ILuaTableHandler
     {
-        private readonly ILuaTableSerializer _serializer;
-
-        public LuaTableHandler(ILuaTableSerializer serializer) : base()
-        {
-            _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
-        }
+        private readonly ILuaTableSerializer _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
 
         public LuaTableModel LoadFile(string filePath, string tableIdentifier = "tbl")
         {
@@ -32,8 +27,7 @@ namespace ItemDescTableModder.Services
 
         public void SaveToFile(LuaTableModel model, string filePath)
         {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
+            ArgumentNullException.ThrowIfNull(model);
 
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentNullException(nameof(filePath));

@@ -6,8 +6,6 @@ namespace ItemDescTableModder.Services
 {
     public class LuaTableSerializer : LuaServiceBase, ILuaTableSerializer
     {
-        private readonly Encoding _encoding;
-
         public LuaTableSerializer() : base()
         {
         }
