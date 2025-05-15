@@ -8,8 +8,8 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 ## 📦 How to Use
 
-<p float="left">
-  <img src="Misc/Doc/how-to-use.gif" width="80%" />
+<p float="center">
+  <img src="Misc/Doc/how-to-use.gif" width="90%" />
 </p>
 
 1. **Make a backup of your current `itemInfo_EN.lua` file**, just in case you want to restore it later.  
