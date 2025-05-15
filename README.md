@@ -8,7 +8,9 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 ## 📦 How to Use
 
-![Usage](Misc/Doc/how-to-use.gif)
+<p float="left">
+  <img src="Misc/Doc/how-to-use.gif" width="80%" />
+</p>
 
 1. **Make a backup of your current `itemInfo_EN.lua` file**, just in case you want to restore it later.  
    _(Usually found in `RagnarokFolder/System`.)_
@@ -37,6 +39,16 @@ This lets you add helpful tags and details to item names and descriptions to mak
 - `[Cooking Material]` — with a list of related stat foods
 - `[Quest Material]` — with the names of related server-exclusive quest items
 - `[Instance Material]` — listing relevant MVP instances where it’s needed
+
+### 🖼️ Samples
+<p float="left">
+  <img src="Misc/Doc/image0.png" width="16%" />
+  <img src="Misc/Doc/image1.png" width="16%" />
+  <img src="Misc/Doc/image2.png" width="16%" />
+  <img src="Misc/Doc/image3.png" width="16%" />
+  <img src="Misc/Doc/image4.png" width="16%" />
+  <img src="Misc/Doc/image5.png" width="16%" />
+</p>
 
 ---
 
