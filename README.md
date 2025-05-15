@@ -51,5 +51,4 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 🛡️ **Tip:** Always keep a copy of the original file before replacing it — in case anything goes wrong or you want to switch back.
 
-Enjoy a more organized and informative Ragnarok item database!  
 Feel free to contribute or suggest improvements.
