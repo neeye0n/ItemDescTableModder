@@ -7,10 +7,7 @@ This lets you add helpful tags and details to item names and descriptions to mak
 ---
 
 ## 📦 How to Use
-
-<p float="center">
-  <img src="Misc/Doc/how-to-use.gif" width="90%" />
-</p>
+<img src="Misc/Doc/how-to-use.gif" width="100%" />
 
 1. **Make a backup of your current `itemInfo_EN.lua` file**, just in case you want to restore it later.  
    _(Usually found in `RagnarokFolder/System`.)_
