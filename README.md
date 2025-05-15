@@ -49,6 +49,12 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 ---
 
-🛡️ **Tip:** Always keep a copy of the original file before replacing it — in case anything goes wrong or you want to switch back.
+## 🛡️ Tips & Reminders
+
+- **Always back up** your original `itemInfo_EN.lua` before making any changes.
+- If something breaks or looks wrong in-game, try restoring the backup or **re-downloading patches** using your game patcher to fix it.
+- **Note:** Future game patches may **automatically overwrite** your modified `itemInfo_EN.lua`. If that happens, just run this tool again to reapply the changes.
+
+---
 
 Feel free to contribute or suggest improvements.
