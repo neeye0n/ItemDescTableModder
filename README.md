@@ -21,25 +21,6 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 ---
 
-## ⚙️ Configuration
-Want to customize which tags show up or change text colors?
-
-You can tweak the behavior of the tool using the included `ItemDescTableModder.conf` file.
-
-✅ **Enable or disable tags**
-
-🎨 **Set your own hex-based colors**
-
-✏️ **Edit tag labels (e.g., "Brew", "Quest")**
-
-📦 **All from one easy-to-edit file!**
-
-👉 **See the full config guide here:**
-[`README_Config.md`](./README_Config.md)  
-(or open modder.config.json directly in your editor to start customizing)
-
----
-
 ## ✨ Features
 
 ### 🏷️ Item Name Modifications
@@ -57,6 +38,8 @@ You can tweak the behavior of the tool using the included `ItemDescTableModder.c
 - `[Instance Material]` — listing relevant MVP instances where it’s needed
 
 ### 🖼️ Samples
+_(Sample images shown may become **outdated** as new features are added)_
+
 <p float="left">
   <img src="Misc/Doc/image0.png" width="16%" />
   <img src="Misc/Doc/image1.png" width="16%" />
@@ -68,6 +51,24 @@ You can tweak the behavior of the tool using the included `ItemDescTableModder.c
 
 ---
 
+## ⚙️ Configuration
+Want to customize which tags show up or change text colors?
+
+You can tweak the behavior of the tool using the included `ItemDescTableModder.conf` file.
+
+✅ **Enable or disable tags**
+
+🎨 **Set your own hex-based colors**
+
+✏️ **Edit tag labels (e.g., "Brew", "Quest")**
+
+📦 **All from one easy-to-edit file!**
+
+👉 **See the full config guide here:**
+[`README_Config.md`](./README_Config.md)  
+_(or open `ItemDescTableModder.conf` directly in your editor to start customizing)_
+
+---
 ## 🛡️ Tips & Reminders
 
 - **Always back up** your original `itemInfo_EN.lua` before making any changes.
@@ -75,5 +76,4 @@ You can tweak the behavior of the tool using the included `ItemDescTableModder.c
 - **Note:** Future game patches may **automatically overwrite** your modified `itemInfo_EN.lua`. If that happens, just run this tool again to reapply the changes.
 
 ---
-
 Feel free to contribute or suggest improvements.
