@@ -208,5 +208,311 @@
       "matId": 508,
       "qty": 25
     }
+  ],
+  "Illusion Staff of Bordeaux": [
+    {
+      "matId": 1648,
+      "qty": 1
+    },
+    {
+      "matId": 25271,
+      "qty": 50
+    },
+    {
+      "matId": 23228,
+      "qty": 500
+    }
+  ],
+  "Illusion Moonlight Dagger": [
+    {
+      "matId": 1234,
+      "qty": 1
+    },
+    {
+      "matId": 25271,
+      "qty": 30
+    },
+    {
+      "matId": 25257,
+      "qty": 100
+    }
+  ],
+  "Illusion Long Mace": [
+    {
+      "matId": 1525,
+      "qty": 1
+    },
+    {
+      "matId": 25271,
+      "qty": 30
+    },
+    {
+      "matId": 25256,
+      "qty": 100
+    }
+  ],
+  "Illusion Spectral Spear": [
+    {
+      "matId": 1477,
+      "qty": 1
+    },
+    {
+      "matId": 25271,
+      "qty": 50
+    },
+    {
+      "matId": 23228,
+      "qty": 500
+    }
+  ],
+  "Illusion Apple of Archer": [
+    {
+      "matId": 2285,
+      "qty": 1
+    },
+    {
+      "matId": 25271,
+      "qty": 75
+    },
+    {
+      "matId": 25258,
+      "qty": 500
+    }
+  ],
+  "Vesper Gear 01": [
+    {
+      "matId": 6752,
+      "qty": 50
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 6961,
+      "qty": 250
+    },
+    {
+      "matId": 6827,
+      "qty": 5
+    },
+    {
+      "matId": 2659,
+      "qty": 1
+    },
+    {
+      "matId": 2662,
+      "qty": 1
+    }
+  ],
+  "Vesper Gear 02": [
+    {
+      "matId": 6752,
+      "qty": 50
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 6961,
+      "qty": 250
+    },
+    {
+      "matId": 6827,
+      "qty": 5
+    },
+    {
+      "matId": 2660,
+      "qty": 1
+    },
+    {
+      "matId": 2661,
+      "qty": 1
+    }
+  ],
+  "Eye of Juno": [
+    {
+      "matId": 6752,
+      "qty": 90
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 6961,
+      "qty": 250
+    },
+    {
+      "matId": 6827,
+      "qty": 10
+    }
+  ],
+  "Vesper Headgear": [
+    {
+      "matId": 6752,
+      "qty": 90
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 6961,
+      "qty": 250
+    },
+    {
+      "matId": 6827,
+      "qty": 10
+    }
+  ],
+  "Robot Helm": [
+    {
+      "matId": 6752,
+      "qty": 90
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 6961,
+      "qty": 250
+    },
+    {
+      "matId": 6827,
+      "qty": 10
+    }
+  ],
+  "Greed Wand": [
+    {
+      "matId": 6752,
+      "qty": 10
+    },
+    {
+      "matId": 7095,
+      "qty": 50
+    },
+    {
+      "matId": 1626,
+      "qty": 5
+    }
+  ],
+  "Pigritia Wave": [
+    {
+      "matId": 6752,
+      "qty": 10
+    },
+    {
+      "matId": 7095,
+      "qty": 50
+    },
+    {
+      "matId": 1918,
+      "qty": 5
+    }
+  ],
+  "Pigritia Spark": [
+    {
+      "matId": 6752,
+      "qty": 10
+    },
+    {
+      "matId": 7095,
+      "qty": 50
+    },
+    {
+      "matId": 1970,
+      "qty": 5
+    }
+  ],
+  "Ira Fist": [
+    {
+      "matId": 6752,
+      "qty": 10
+    },
+    {
+      "matId": 7095,
+      "qty": 50
+    },
+    {
+      "matId": 1822,
+      "qty": 5
+    }
+  ],
+  "Wrath Rack": [
+    {
+      "matId": 6752,
+      "qty": 10
+    },
+    {
+      "matId": 7095,
+      "qty": 50
+    },
+    {
+      "matId": 13011,
+      "qty": 5
+    }
+  ],
+  "Hipocrisy Edge": [
+    {
+      "matId": 6752,
+      "qty": 10
+    },
+    {
+      "matId": 7095,
+      "qty": 50
+    },
+    {
+      "matId": 1164,
+      "qty": 5
+    }
+  ],
+  "Self-destruct Device": [
+    {
+      "matId": 6752,
+      "qty": 20
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 1051,
+      "qty": 100
+    }
+  ],
+  "Power Machine Arm": [
+    {
+      "matId": 6752,
+      "qty": 20
+    },
+    {
+      "matId": 7095,
+      "qty": 100
+    },
+    {
+      "matId": 7094,
+      "qty": 100
+    }
+  ],
+  "Runaway Chip": [
+    {
+      "matId": 6827,
+      "qty": 17
+    }
+  ],
+  "Broken Chip 01": [
+    {
+      "matId": 6827,
+      "qty": 17
+    }
+  ],
+  "Broken Chip 02": [
+    {
+      "matId": 6827,
+      "qty": 17
+    }
   ]
 }

@@ -1,10 +1,9 @@
-﻿using ItemDescTableModder.Models;
-using ItemDescTableModder.Services;
+﻿using ItemDescTableModder.Services;
 using ItemDescTableModder.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
 
 namespace ItemDescTableModder
 {
@@ -13,25 +12,41 @@ namespace ItemDescTableModder
         static void Main(string[] args)
         {
             string executableDirectory = Environment.CurrentDirectory;
-            string configPath = Path.Combine(executableDirectory, $"{typeof(Program).Namespace}.conf");
 
-            // Load or create config
-            Config config = LoadOrCreateConfig(configPath);
+            var services = new ServiceCollection();
+
+            // Initial Config and Logger setup
+            services
+                .AddSingleton(executableDirectory)
+                .AddLogging(configure =>
+                {
+                    configure.AddSimpleConsole(options =>
+                    {
+                        options.IncludeScopes = true;
+                        options.SingleLine = true;
+                        options.TimestampFormat = "[HH:mm:ss] ";
+                    });
+                })
+                .AddSingleton<IConfigLoader, ConfigLoader>();
+
+            // Creating tempProvider to load config
+            var tempProvider = services.BuildServiceProvider();
+            var configLoader = tempProvider.GetRequiredService<IConfigLoader>();
+            var config = configLoader.Load();
 
             // Setup DI
-            var serviceProvider = new ServiceCollection()
-                .AddLogging(configure => configure.AddConsole())
+            services
+                .RemoveAll<IConfigLoader>()
                 .AddSingleton(Options.Create(config))
                 .AddSingleton<IApp, App>()
-                .AddSingleton(executableDirectory)
                 .AddScoped<ILuaTableHandler, LuaTableHandler>()
                 .AddScoped<ILuaTableModifier, LuaTableModifier>()
-                .AddScoped<ILuaTableSerializer, LuaTableSerializer>()
-                .BuildServiceProvider();
+                .AddScoped<ILuaTableSerializer, LuaTableSerializer>();
 
+            var provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true });
             // Get service
-            var app = serviceProvider.GetRequiredService<IApp>();
-            var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+            var app = provider.GetRequiredService<IApp>();
+            var logger = provider.GetRequiredService<ILogger<Program>>();
 
             try
             {
@@ -47,7 +62,7 @@ namespace ItemDescTableModder
                 else
                 {
                     logger.LogWarning("No file provided or file does not exist.");
-                    Console.WriteLine("Please drag a file onto the application to process it.");
+                    logger.LogWarning("Please drag a file onto the application to process it.");
                 }
             }
             catch (Exception ex)
@@ -56,34 +71,9 @@ namespace ItemDescTableModder
             }
 
             // Keep console window open
-            Console.WriteLine("Press any key to exit...");
+            logger.LogInformation("Press any key to exit...");
             Console.ReadKey();
         }
-
-        private static Config LoadOrCreateConfig(string configPath)
-        {
-            if (!File.Exists(configPath))
-            {
-                // Create a default config
-                var defaultConfig = new Config();
-                string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(configPath, json);
-                return defaultConfig;
-            }
-
-            try
-            {
-                // Load existing config
-                string json = File.ReadAllText(configPath);
-                var config = JsonSerializer.Deserialize<Config>(json);
-                return config ?? new Config();
-            }
-            catch (Exception)
-            {
-                // If there's an error, return default config
-                return new Config();
-            }
-        }
-
     }
 }
+

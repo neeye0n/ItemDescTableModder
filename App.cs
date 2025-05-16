@@ -62,95 +62,130 @@ namespace ItemDescTableModder
             // Quest
             // Instance
 
-            // Apply Instance Suffix
+            // Apply Instance
             _logger.LogInformation("Applying Instance descriptions and tags...");
             foreach (var kvp in instanceTags)
             {
                 _tableModifier.ModifyItem(table, kvp.Key, item =>
                 {
-                    var displayName = item.Get("identifiedDisplayName").String;
-                    item.Set("identifiedDisplayName", DynValue.NewString(displayName + " (" + kvp.Value + ")"));
+                    var instanceInfos = kvp.Value.Split("||");
+                    if (instanceInfos.Length == 0)
+                        return;
 
-                    var descriptionTable = item.Get("identifiedDescriptionName").Table;
-                    var instanceInfos = kvp.Value.Split(",");
-                    if (instanceInfos.Length != 0)
+                    if (_config.InstanceConfig.EnableTags != 0)
                     {
-                        List<DynValue> newDescList = [DynValue.NewString($"^990033[Instance Material]^000000")];
+                        var instanceTags = string.Join(", ", instanceInfos.Select(item =>
+                        {
+                            var parts = item.Split("&&&", StringSplitOptions.TrimEntries);
+                            return $"{parts[0]} - {parts[1]}";
+                        }));
+
+                        var displayName = item.Get("identifiedDisplayName").String;
+                        item.Set("identifiedDisplayName", DynValue.NewString(displayName + " (" + instanceTags + ")"));
+                    }
+
+                    if (_config.InstanceConfig.EnableDescriptions != 0)
+                    {
+                        var descriptionTable = item.Get("identifiedDescriptionName").Table;
+
+                        List<DynValue> newDescList = [DynValue.NewString($"^{_config.InstanceConfig.DescriptionHeaderColor}[Instance Material]^000000")];
                         foreach (var instanceInfo in instanceInfos)
                         {
-                            var info = instanceInfo.Split("-");
-                            newDescList.Add(DynValue.NewString($"^990033{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
+                            var info = instanceInfo.Split("&&&", StringSplitOptions.TrimEntries);
+                            newDescList.Add(DynValue.NewString($"^{_config.InstanceConfig.DescriptionRowsColor}{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
                         }
                         AddDescriptionsToTop(ref descriptionTable, newDescList);
                     }
                 });
             }
 
-            // Apply Quest Prefix
+            // Apply Quest
             _logger.LogInformation("Applying Quest descriptions and tags...");
             foreach (var kvp in questTags)
             {
                 _tableModifier.ModifyItem(table, kvp.Key, item =>
                 {
-                    var displayName = item.Get("identifiedDisplayName").String;
-                    var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                    item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.QuestTagText}]" + startingSpace + displayName));
+                    var questInfos = kvp.Value.Split("||");
+                    if (questInfos.Length == 0)
+                        return;
 
-                    var descriptionTable = item.Get("identifiedDescriptionName").Table;
-                    var questInfos = kvp.Value.Split(",");
-                    if (questInfos.Length != 0)
+                    if (_config.QuestConfig.EnableTags != 0)
                     {
-                        List<DynValue> newDescList = [DynValue.NewString($"^{_config.QuestDescTextColor}[Quest Material]^000000")];
+                        var displayName = item.Get("identifiedDisplayName").String;
+                        var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
+                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.QuestConfig.TagText}]" + startingSpace + displayName));
+                    }
+
+                    if (_config.QuestConfig.EnableDescriptions != 0)
+                    {
+                        var descriptionTable = item.Get("identifiedDescriptionName").Table;
+
+                        List<DynValue> newDescList = [DynValue.NewString($"^{_config.QuestConfig.DescriptionHeaderColor}[Quest Material]^000000")];
                         foreach (var questInfo in questInfos)
                         {
-                            var info = questInfo.Split("-");
-                            newDescList.Add(DynValue.NewString($"^{_config.QuestDescTextColor}{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
-
+                            var info = questInfo.Split("&&&", StringSplitOptions.TrimEntries);
+                            newDescList.Add(DynValue.NewString($"^{_config.QuestConfig.DescriptionRowsColor}{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
                         }
                         AddDescriptionsToTop(ref descriptionTable, newDescList);
                     }
                 });
             }
 
-            // Apply Cooking Prefix
+            // Apply Cooking
             _logger.LogInformation("Applying Cooking descriptions and tags...");
             foreach (var kvp in cookingTags)
             {
                 _tableModifier.ModifyItem(table, kvp.Key, item =>
                 {
-                    var displayName = item.Get("identifiedDisplayName").String;
-                    var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                    item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.CookingTagText}]" + startingSpace + displayName));
+                    var cookingInfos = kvp.Value.Split("||");
+                    if (cookingInfos.Length == 0)
+                        return;
 
-                    var descriptionTable = item.Get("identifiedDescriptionName").Table;
-                    var cookingInfos = kvp.Value.Split(",");
-                    if (cookingInfos.Length != 0)
+                    if (_config.CookingConfig.EnableTags != 0)
                     {
-                        List<DynValue> newDescList = [DynValue.NewString($"^{_config.CookingDescTextColor}[Cooking Material]^000000")];
+                        var displayName = item.Get("identifiedDisplayName").String;
+                        var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
+                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.CookingConfig.TagText}]" + startingSpace + displayName));
+                    }
+
+                    if (_config.CookingConfig.EnableDescriptions != 0)
+                    {
+                        var descriptionTable = item.Get("identifiedDescriptionName").Table;
+
+                        List<DynValue> newDescList = [DynValue.NewString($"^{_config.CookingConfig.DescriptionHeaderColor}[Cooking Material]^000000")];
                         foreach (var cookingInfo in cookingInfos)
                         {
-                            var info = cookingInfo.Split("-");
-                            newDescList.Add(DynValue.NewString($"^{_config.CookingDescTextColor}{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
+                            var info = cookingInfo.Split("&&&", StringSplitOptions.TrimEntries);
+                            newDescList.Add(DynValue.NewString($"^{_config.CookingConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
                         }
                         AddDescriptionsToTop(ref descriptionTable, newDescList);
                     }
                 });
             }
 
-            // Apply Brew Prefix
+            // Apply Brewing
             _logger.LogInformation("Applying Brewing descriptions and tags...");
             foreach (var kvp in brewingTags)
             {
                 _tableModifier.ModifyItem(table, kvp.Key, item =>
                 {
-                    var displayName = item.Get("identifiedDisplayName").String;
-                    var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                    item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.BrewingTagText}]" + startingSpace + displayName));
+                    //var brewingInfos = kvp.Value.Split("||");
+                    //if (brewingInfos.Length == 0)
+                    //    return;
+                    if (_config.BrewingConfig.EnableTags != 0)
+                    {
+                        var displayName = item.Get("identifiedDisplayName").String;
+                        var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
+                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.BrewingConfig.TagText}]" + startingSpace + displayName));
+                    }
 
-                    var descriptionTable = item.Get("identifiedDescriptionName").Table;
-                    AddDescriptionsToTop(ref descriptionTable, [
-                        DynValue.NewString($"^{_config.BrewingDescTextColor}[Brewing Material]^000000")
-                    ]);
+                    if (_config.BrewingConfig.EnableDescriptions != 0)
+                    {
+                        var descriptionTable = item.Get("identifiedDescriptionName").Table;
+                        AddDescriptionsToTop(ref descriptionTable, [
+                            DynValue.NewString($"^{_config.BrewingConfig.DescriptionHeaderColor}[Brewing Material]^000000")
+                        ]);
+                    }
                 });
             }
 
@@ -192,7 +227,7 @@ namespace ItemDescTableModder
                 .GroupBy(x => x.Item.MaterialId)
                 .ToDictionary(
                     g => g.Key,
-                    g => string.Join(", ", g.Select(x => $"{x.Group} - {x.Item.Quantity}"))
+                    g => string.Join("||", g.Select(x => $"{x.Group}&&&{x.Item.Quantity}"))
                 );
             }
 
