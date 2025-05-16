@@ -1,6 +1,7 @@
 ﻿using ItemDescTableModder.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ItemDescTableModder
 {
@@ -9,11 +10,18 @@ namespace ItemDescTableModder
         Config Load();
     }
 
-
     public class ConfigLoader(ILogger<ConfigLoader> logger, string executableDirectory) : IConfigLoader
     {
         private readonly ILogger<ConfigLoader> _logger = logger;
         private readonly string _workingDirectory = executableDirectory;
+        private readonly JsonSerializerSettings _jsonSerializerSettings = new()
+        {
+            ContractResolver = new DefaultContractResolver()
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            },
+            Formatting = Formatting.Indented,
+        };
 
         public Config Load()
         {
@@ -24,7 +32,7 @@ namespace ItemDescTableModder
             {
                 _logger.LogWarning("Config {configFileName} not found. Creating default config file.", configFileName);
                 var defaultConfig = GenerateDefaultConfig();
-                string json = JsonConvert.SerializeObject(defaultConfig, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(defaultConfig, _jsonSerializerSettings);
                 File.WriteAllText(configPath, json);
                 return defaultConfig;
             }
@@ -33,12 +41,15 @@ namespace ItemDescTableModder
             {
                 _logger.LogInformation("Loading config {configFileName}", configFileName);
                 var json = File.ReadAllText(configPath);
-                var config = JsonConvert.DeserializeObject<Config>(json);
+                var config = JsonConvert.DeserializeObject<Config>(json, _jsonSerializerSettings);
                 return config ?? GenerateDefaultConfig();
             }
             catch (Exception)
             {
-                _logger.LogWarning("Invalid config file detected. Tool is going to use default configurations.");
+                _logger.LogWarning("Invalid config file detected");
+                _logger.LogWarning("Removing invalid config file");
+                File.Delete(configPath);
+                _logger.LogWarning("Tool is going to use default configurations");
                 return GenerateDefaultConfig();
             }
         }

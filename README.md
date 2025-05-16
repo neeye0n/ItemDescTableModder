@@ -21,6 +21,25 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 ---
 
+## ⚙️ Configuration
+Want to customize which tags show up or change text colors?
+
+You can tweak the behavior of the tool using the included `ItemDescTableModder.conf` file.
+
+✅ **Enable or disable tags**
+
+🎨 **Set your own hex-based colors**
+
+✏️ **Edit tag labels (e.g., "Brew", "Quest")**
+
+📦 **All from one easy-to-edit file!**
+
+👉 **See the full config guide here:**
+[`README_Config.md`](./README_Config.md)  
+(or open modder.config.json directly in your editor to start customizing)
+
+---
+
 ## ✨ Features
 
 ### 🏷️ Item Name Modifications
