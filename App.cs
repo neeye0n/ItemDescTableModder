@@ -81,7 +81,7 @@ namespace ItemDescTableModder
                         }));
 
                         var displayName = item.Get("identifiedDisplayName").String;
-                        item.Set("identifiedDisplayName", DynValue.NewString(displayName + " (" + instanceTags + ")"));
+                        item.Set("identifiedDisplayName", DynValue.NewString(displayName.Trim() + " (" + instanceTags + ")"));
                     }
 
                     if (_config.InstanceConfig.EnableDescriptions != 0)
@@ -113,7 +113,7 @@ namespace ItemDescTableModder
                     {
                         var displayName = item.Get("identifiedDisplayName").String;
                         var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.QuestConfig.TagText}]" + startingSpace + displayName));
+                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.QuestConfig.TagText}]" + startingSpace + displayName.Trim()));
                     }
 
                     if (_config.QuestConfig.EnableDescriptions != 0)
@@ -145,7 +145,7 @@ namespace ItemDescTableModder
                     {
                         var displayName = item.Get("identifiedDisplayName").String;
                         var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.CookingConfig.TagText}]" + startingSpace + displayName));
+                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.CookingConfig.TagText}]" + startingSpace + displayName.Trim()));
                     }
 
                     if (_config.CookingConfig.EnableDescriptions != 0)
@@ -176,7 +176,7 @@ namespace ItemDescTableModder
                     {
                         var displayName = item.Get("identifiedDisplayName").String;
                         var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.BrewingConfig.TagText}]" + startingSpace + displayName));
+                        item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.BrewingConfig.TagText}]" + startingSpace + displayName.Trim()));
                     }
 
                     if (_config.BrewingConfig.EnableDescriptions != 0)
