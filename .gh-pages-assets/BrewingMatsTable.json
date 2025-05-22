@@ -1,0 +1,364 @@
+{
+  "Red Potion": [
+    {
+      "matId": 507,
+      "matName": "Red Herb",
+      "qty": 1
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "Yellow Potion": [
+    {
+      "matId": 508,
+      "matName": "Yellow Herb",
+      "qty": 1
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "White Potion": [
+    {
+      "matId": 509,
+      "matName": "White Herb",
+      "qty": 1
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "Blue Potion": [
+    {
+      "matId": 510,
+      "matName": "Blue Herb",
+      "qty": 1
+    },
+    {
+      "matId": 911,
+      "matName": "Scell",
+      "qty": 1
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "Condensed Red Potion": [
+    {
+      "matId": 501,
+      "matName": "Red Potion",
+      "qty": 1
+    },
+    {
+      "matId": 952,
+      "matName": "Cactus Needle",
+      "qty": 1
+    },
+    {
+      "matId": 1092,
+      "matName": "Empty Test Tube",
+      "qty": 1
+    }
+  ],
+  "Condensed Yellow Potion": [
+    {
+      "matId": 503,
+      "matName": "Yellow Potion",
+      "qty": 1
+    },
+    {
+      "matId": 1017,
+      "matName": "Mole Whiskers",
+      "qty": 1
+    },
+    {
+      "matId": 1092,
+      "matName": "Empty Test Tube",
+      "qty": 1
+    }
+  ],
+  "Condensed White Potion": [
+    {
+      "matId": 504,
+      "matName": "White Potion",
+      "qty": 1
+    },
+    {
+      "matId": 1061,
+      "matName": "Witched Starsand",
+      "qty": 1
+    },
+    {
+      "matId": 1092,
+      "matName": "Empty Test Tube",
+      "qty": 1
+    }
+  ],
+  "Anodyne": [
+    {
+      "matId": 708,
+      "matName": "Ment",
+      "qty": 1
+    },
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 970,
+      "matName": "Alcohol",
+      "qty": 1
+    }
+  ],
+  "Aloevera": [
+    {
+      "matId": 518,
+      "matName": "Honey",
+      "qty": 1
+    },
+    {
+      "matId": 704,
+      "matName": "Aloe",
+      "qty": 1
+    },
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    }
+  ],
+  "Alcohol": [
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 905,
+      "matName": "Stem",
+      "qty": 5
+    },
+    {
+      "matId": 1092,
+      "matName": "Empty Test Tube",
+      "qty": 1
+    },
+    {
+      "matId": 7033,
+      "matName": "Poison Spore",
+      "qty": 5
+    }
+  ],
+  "Bottle Grenade": [
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 970,
+      "matName": "Alcohol",
+      "qty": 1
+    },
+    {
+      "matId": 1059,
+      "matName": "Fabric",
+      "qty": 1
+    }
+  ],
+  "Acid Bottle": [
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 929,
+      "matName": "Immortal Heart",
+      "qty": 1
+    }
+  ],
+  "Plant Bottle": [
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 1032,
+      "matName": "Maneater Blossom",
+      "qty": 2
+    }
+  ],
+  "Marine Sphere Bottle": [
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 1050,
+      "matName": "Tendon",
+      "qty": 1
+    },
+    {
+      "matId": 1051,
+      "matName": "Detonator",
+      "qty": 1
+    }
+  ],
+  "Glistening Coat": [
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 950,
+      "matName": "Heart of Mermaid",
+      "qty": 1
+    },
+    {
+      "matId": 970,
+      "matName": "Alcohol",
+      "qty": 1
+    },
+    {
+      "matId": 1044,
+      "matName": "Zenorc's Fang",
+      "qty": 1
+    }
+  ],
+  "Embryo": [
+    {
+      "matId": 7140,
+      "matName": "Seed of Life",
+      "qty": 1
+    },
+    {
+      "matId": 7141,
+      "matName": "Morning Dew of Yggdrasil",
+      "qty": 1
+    },
+    {
+      "matId": 7143,
+      "matName": "Glass Tube",
+      "qty": 1
+    }
+  ],
+  "Fireproof Potion": [
+    {
+      "matId": 716,
+      "matName": "Red Gemstone",
+      "qty": 1
+    },
+    {
+      "matId": 1012,
+      "matName": "Frill",
+      "qty": 2
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "Coldproof Potion": [
+    {
+      "matId": 717,
+      "matName": "Blue Gemstone",
+      "qty": 1
+    },
+    {
+      "matId": 950,
+      "matName": "Heart of Mermaid",
+      "qty": 3
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "Earthproof Potion": [
+    {
+      "matId": 715,
+      "matName": "Yellow Gemstone",
+      "qty": 1
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 7126,
+      "matName": "Large Jellopy",
+      "qty": 2
+    }
+  ],
+  "Thunderproof Potion": [
+    {
+      "matId": 717,
+      "matName": "Blue Gemstone",
+      "qty": 1
+    },
+    {
+      "matId": 1057,
+      "matName": "Moth Dust",
+      "qty": 3
+    },
+    {
+      "matId": 1093,
+      "matName": "Empty Potion Bottle",
+      "qty": 1
+    }
+  ],
+  "Poison Bottle": [
+    {
+      "matId": 657,
+      "matName": "Berserk Potion",
+      "qty": 1
+    },
+    {
+      "matId": 713,
+      "matName": "Empty Bottle",
+      "qty": 1
+    },
+    {
+      "matId": 937,
+      "matName": "Venom Canine",
+      "qty": 1
+    },
+    {
+      "matId": 939,
+      "matName": "Bee Sting",
+      "qty": 1
+    },
+    {
+      "matId": 952,
+      "matName": "Cactus Needle",
+      "qty": 1
+    },
+    {
+      "matId": 972,
+      "matName": "Karvodailnirol",
+      "qty": 1
+    },
+    {
+      "matId": 7033,
+      "matName": "Poison Spore",
+      "qty": 1
+    }
+  ]
+}

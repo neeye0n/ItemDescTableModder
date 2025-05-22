@@ -1,0 +1,556 @@
+{
+  "Amon Ra": [
+    {
+      "matId": 930,
+      "matName": "Rotten Bandages",
+      "qty": 30
+    },
+    {
+      "matId": 1096,
+      "matName": "Round Shell",
+      "qty": 20
+    },
+    {
+      "matId": 912,
+      "matName": "Zargon",
+      "qty": 10
+    }
+  ],
+  "Atroce": [
+    {
+      "matId": 919,
+      "matName": "Animal Skin",
+      "qty": 40
+    },
+    {
+      "matId": 7564,
+      "matName": "Rotten Meat",
+      "qty": 40
+    }
+  ],
+  "Baphomet": [
+    {
+      "matId": 1031,
+      "matName": "Mantis Scythe",
+      "qty": 15
+    },
+    {
+      "matId": 923,
+      "matName": "Evil Horn",
+      "qty": 15
+    },
+    {
+      "matId": 508,
+      "matName": "Yellow Herb",
+      "qty": 45
+    }
+  ],
+  "Bio3 MVPs": [
+    {
+      "matId": 7345,
+      "matName": "Handcuffs",
+      "qty": 50
+    },
+    {
+      "matId": 7347,
+      "matName": "Research Charts",
+      "qty": 20
+    }
+  ],
+  "Dark Lord": [
+    {
+      "matId": 958,
+      "matName": "Horrendous Mouth",
+      "qty": 50
+    },
+    {
+      "matId": 1059,
+      "matName": "Fabric",
+      "qty": 50
+    }
+  ],
+  "Detale": [
+    {
+      "matId": 7445,
+      "matName": "Yellow Bijou",
+      "qty": 20
+    },
+    {
+      "matId": 7446,
+      "matName": "Blue Bijou",
+      "qty": 20
+    },
+    {
+      "matId": 7447,
+      "matName": "Green Bijou",
+      "qty": 20
+    },
+    {
+      "matId": 7448,
+      "matName": "Red Bijou",
+      "qty": 20
+    }
+  ],
+  "Doppelganger": [
+    {
+      "matId": 944,
+      "matName": "Horseshoe",
+      "qty": 50
+    },
+    {
+      "matId": 1060,
+      "matName": "Golden Hair",
+      "qty": 30
+    },
+    {
+      "matId": 1039,
+      "matName": "Little Evil Wing",
+      "qty": 5
+    }
+  ],
+  "Dracula": [
+    {
+      "matId": 7006,
+      "matName": "Wing of Red Bat",
+      "qty": 50
+    },
+    {
+      "matId": 1062,
+      "matName": "Jack o' Pumpkin",
+      "qty": 50
+    },
+    {
+      "matId": 913,
+      "matName": "Tooth of Bat",
+      "qty": 50
+    }
+  ],
+  "Drake": [
+    {
+      "matId": 932,
+      "matName": "Skel-Bone",
+      "qty": 50
+    },
+    {
+      "matId": 7013,
+      "matName": "Coral Reef",
+      "qty": 25
+    }
+  ],
+  "Eddga": [
+    {
+      "matId": 7064,
+      "matName": "Wing of Dragonfly",
+      "qty": 50
+    },
+    {
+      "matId": 1022,
+      "matName": "Nine Tails",
+      "qty": 50
+    }
+  ],
+  "Egnigem Cenia": [
+    {
+      "matId": 7345,
+      "matName": "Handcuffs",
+      "qty": 15
+    },
+    {
+      "matId": 7347,
+      "matName": "Research Charts",
+      "qty": 5
+    }
+  ],
+  "Evil Snake Lord": [
+    {
+      "matId": 7162,
+      "matName": "Evil Cloud Crumb",
+      "qty": 40
+    },
+    {
+      "matId": 7165,
+      "matName": "Transparent Celestial Robe",
+      "qty": 30
+    }
+  ],
+  "Garm": [
+    {
+      "matId": 948,
+      "matName": "Bear's Footskin",
+      "qty": 60
+    },
+    {
+      "matId": 910,
+      "matName": "Garlet",
+      "qty": 5
+    }
+  ],
+  "Gloom Under Night": [
+    {
+      "matId": 7563,
+      "matName": "Bloody Rune",
+      "qty": 40
+    },
+    {
+      "matId": 7567,
+      "matName": "Suspicious Hat",
+      "qty": 10
+    },
+    {
+      "matId": 7340,
+      "matName": "Will of the Darkness",
+      "qty": 10
+    }
+  ],
+  "Golden Thief Bug": [
+    {
+      "matId": 955,
+      "matName": "Worm Peeling",
+      "qty": 100
+    },
+    {
+      "matId": 928,
+      "matName": "Insect Feeler",
+      "qty": 100
+    },
+    {
+      "matId": 915,
+      "matName": "Chrysalis",
+      "qty": 25
+    }
+  ],
+  "Ifrit": [
+    {
+      "matId": 7097,
+      "matName": "Burning Heart",
+      "qty": 25
+    },
+    {
+      "matId": 7122,
+      "matName": "Burning Hair",
+      "qty": 25
+    },
+    {
+      "matId": 7069,
+      "matName": "Destroyed Armor",
+      "qty": 25
+    }
+  ],
+  "Kiel-D01": [
+    {
+      "matId": 7507,
+      "matName": "Solid Iron Piece",
+      "qty": 30
+    },
+    {
+      "matId": 7512,
+      "matName": "Burnt Part",
+      "qty": 20
+    },
+    {
+      "matId": 7054,
+      "matName": "brigan",
+      "qty": 20
+    }
+  ],
+  "Ktullanux": [
+    {
+      "matId": 7561,
+      "matName": "Glacial Heart",
+      "qty": 60
+    },
+    {
+      "matId": 7066,
+      "matName": "Ice Cubic",
+      "qty": 40
+    }
+  ],
+  "Lady Tanee": [
+    {
+      "matId": 7301,
+      "matName": "Tassel",
+      "qty": 50
+    },
+    {
+      "matId": 7299,
+      "matName": "Straw Basket",
+      "qty": 30
+    }
+  ],
+  "Lord of Death": [
+    {
+      "matId": 7218,
+      "matName": "Decomposed Rope",
+      "qty": 30
+    },
+    {
+      "matId": 7210,
+      "matName": "Armor Piece of Dullahan",
+      "qty": 30
+    },
+    {
+      "matId": 7220,
+      "matName": "Ectoplasm",
+      "qty": 30
+    }
+  ],
+  "Memory of Thanatos": [
+    {
+      "matId": 7436,
+      "matName": "Fragment of Agony",
+      "qty": 1
+    },
+    {
+      "matId": 7437,
+      "matName": "Fragment of Misery",
+      "qty": 1
+    },
+    {
+      "matId": 7438,
+      "matName": "Fragment of Hatred",
+      "qty": 1
+    },
+    {
+      "matId": 7439,
+      "matName": "Fragment of Despair",
+      "qty": 1
+    }
+  ],
+  "Maya": [
+    {
+      "matId": 955,
+      "matName": "Worm Peeling",
+      "qty": 75
+    },
+    {
+      "matId": 938,
+      "matName": "Sticky Mucus",
+      "qty": 30
+    }
+  ],
+  "Mistress": [
+    {
+      "matId": 939,
+      "matName": "Bee Sting",
+      "qty": 50
+    },
+    {
+      "matId": 1042,
+      "matName": "Bug Leg",
+      "qty": 50
+    }
+  ],
+  "Moonlight Flower": [
+    {
+      "matId": 1022,
+      "matName": "Nine Tails",
+      "qty": 30
+    },
+    {
+      "matId": 1021,
+      "matName": "Dokebi Horn",
+      "qty": 30
+    },
+    {
+      "matId": 953,
+      "matName": "Stone Heart",
+      "qty": 15
+    }
+  ],
+  "Orc Hero": [
+    {
+      "matId": 7002,
+      "matName": "Ogre's Tooth",
+      "qty": 50
+    },
+    {
+      "matId": 922,
+      "matName": "Orc's Fang",
+      "qty": 50
+    }
+  ],
+  "Orc Lord": [
+    {
+      "matId": 931,
+      "matName": "Orcish Voucher",
+      "qty": 50
+    },
+    {
+      "matId": 7126,
+      "matName": "Large Jellopy",
+      "qty": 5
+    }
+  ],
+  "Osiris": [
+    {
+      "matId": 528,
+      "matName": "Monster's Feed",
+      "qty": 30
+    },
+    {
+      "matId": 936,
+      "matName": "Scale Shell",
+      "qty": 30
+    },
+    {
+      "matId": 930,
+      "matName": "Rotten Bandage",
+      "qty": 30
+    }
+  ],
+  "Pharaoh": [
+    {
+      "matId": 7110,
+      "matName": "Broken Sword",
+      "qty": 50
+    },
+    {
+      "matId": 954,
+      "matName": "Shining Scale",
+      "qty": 20
+    },
+    {
+      "matId": 1045,
+      "matName": "Cultish Masque",
+      "qty": 10
+    }
+  ],
+  "Phreeoni": [
+    {
+      "matId": 1055,
+      "matName": "Earthworm Peeling",
+      "qty": 50
+    }
+  ],
+  "RSX-0806": [
+    {
+      "matId": 7315,
+      "matName": "Dark Crystal Fragment",
+      "qty": 15
+    },
+    {
+      "matId": 7321,
+      "matName": "Crystal Fragment",
+      "qty": 15
+    },
+    {
+      "matId": 7319,
+      "matName": "Used Iron Plate",
+      "qty": 15
+    },
+    {
+      "matId": 7317,
+      "matName": "Rusty Screw",
+      "qty": 15
+    }
+  ],
+  "Samurai Specter": [
+    {
+      "matId": 7156,
+      "matName": "Broken Shuriken",
+      "qty": 40
+    },
+    {
+      "matId": 7158,
+      "matName": "Broken Liquor",
+      "qty": 30
+    }
+  ],
+  "Stormy Knight": [
+    {
+      "matId": 539,
+      "matName": "Piece of Cake",
+      "qty": 10
+    },
+    {
+      "matId": 538,
+      "matName": "Well-Baked Cookie",
+      "qty": 20
+    },
+    {
+      "matId": 911,
+      "matName": "Scell",
+      "qty": 20
+    }
+  ],
+  "Tao Gunka": [
+    {
+      "matId": 1048,
+      "matName": "Horrendous Hair",
+      "qty": 50
+    },
+    {
+      "matId": 1055,
+      "matName": "Earthworm Peeling",
+      "qty": 50
+    }
+  ],
+  "Turtle General": [
+    {
+      "matId": 967,
+      "matName": "Turtle Shell",
+      "qty": 50
+    },
+    {
+      "matId": 7070,
+      "matName": "Broken Shell",
+      "qty": 15
+    },
+    {
+      "matId": 7072,
+      "matName": "Old Shuriken",
+      "qty": 15
+    }
+  ],
+  "Valkyrie Randgris": [
+    {
+      "matId": 7063,
+      "matName": "Soft Feather",
+      "qty": 15
+    },
+    {
+      "matId": 7511,
+      "matName": "Rune of Darkness",
+      "qty": 30
+    }
+  ],
+  "Vesper": [
+    {
+      "matId": 999,
+      "matName": "Steel",
+      "qty": 5
+    },
+    {
+      "matId": 7356,
+      "matName": "Crest Piece",
+      "qty": 3
+    },
+    {
+      "matId": 7357,
+      "matName": "Crest Piece",
+      "qty": 3
+    },
+    {
+      "matId": 7358,
+      "matName": "Crest Piece",
+      "qty": 3
+    },
+    {
+      "matId": 7359,
+      "matName": "Crest Piece",
+      "qty": 1
+    }
+  ],
+  "White Lady": [
+    {
+      "matId": 7266,
+      "matName": "Denture from Dragon Mask",
+      "qty": 40
+    },
+    {
+      "matId": 7262,
+      "matName": "Folding Fan of Cat Ghost",
+      "qty": 40
+    }
+  ]
+}
