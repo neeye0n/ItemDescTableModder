@@ -34,14 +34,14 @@ function generateMaterialTags(
 export const load: PageLoad = async ({ fetch }) => {
   const resourceurl = "https://neeye0n.github.io/flux/ItemDescTableModder";
   const urls = [
-    `${resourceurl}/BrewingMatsTable.json`,
-    `${resourceurl}/CookingMatsTable.json`,
-    `${resourceurl}/InstanceMatsTable.json`,
-    `${resourceurl}/QuestMatsTable.json`,
     `${resourceurl}/app.settings.json`,
+    `${resourceurl}/brewingMatsTable.json`,
+    `${resourceurl}/cookingMatsTable.json`,
+    `${resourceurl}/instanceMatsTable.json`,
+    `${resourceurl}/questMatsTable.json`,
   ];
 
-  const [brewRes, cookRes, instRes, questRes, configRes] = await Promise.all(
+  const [configRes, brewRes, cookRes, instRes, questRes] = await Promise.all(
     urls.map((url) => fetch(url))
   );
 
@@ -50,18 +50,18 @@ export const load: PageLoad = async ({ fetch }) => {
   }
 
   const [dataA, dataB, dataC, dataD, dataE] = await Promise.all([
+    configRes.json() as Promise<ConfigFile>,
     brewRes.json() as Promise<Record<string, MaterialInfo[]>>,
     cookRes.json() as Promise<Record<string, MaterialInfo[]>>,
     instRes.json() as Promise<Record<string, MaterialInfo[]>>,
     questRes.json() as Promise<Record<string, MaterialInfo[]>>,
-    configRes.json() as Promise<ConfigFile>,
   ]);
 
   return {
-    brewingTags: generateMaterialTags(dataA),
-    cookingTags: generateMaterialTags(dataB),
-    instanceTags: generateMaterialTags(dataC),
-    questTags: generateMaterialTags(dataD),
-    configFile: dataE,
+    configFile: dataA,
+    brewingTags: generateMaterialTags(dataB),
+    cookingTags: generateMaterialTags(dataC),
+    instanceTags: generateMaterialTags(dataD),
+    questTags: generateMaterialTags(dataE),
   };
 };

@@ -2,7 +2,6 @@
   import "../app.css";
   import { base } from "$app/paths";
   import type { ConfigFile } from "$lib/models/config";
-
   type PageData = {
     configFile: ConfigFile;
     brewingTags: Record<number, string>;
@@ -10,6 +9,7 @@
     instanceTags: Record<number, string>;
     questTags: Record<number, string>;
   };
+
   export let data: PageData;
   const { configFile, brewingTags, cookingTags, instanceTags, questTags } =
     data;
