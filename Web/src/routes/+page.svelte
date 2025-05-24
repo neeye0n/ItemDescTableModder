@@ -1,10 +1,18 @@
 <script lang="ts">
   import "../app.css";
   import { base } from "$app/paths";
-  import type { MaterialInfo } from "$lib/models/materialInfo.ts";
+  import type { ConfigFile } from "$lib/models/config";
 
-  export let data;
-  console.log(data);
+  type PageData = {
+    configFile: ConfigFile;
+    brewingTags: Record<number, string>;
+    cookingTags: Record<number, string>;
+    instanceTags: Record<number, string>;
+    questTags: Record<number, string>;
+  };
+  export let data: PageData;
+  const { configFile, brewingTags, cookingTags, instanceTags, questTags } =
+    data;
 
   let file: File | null = null;
   let fileInput: HTMLInputElement | null = null;
@@ -73,44 +81,13 @@
       return;
     }
 
-    //
+    // Add File Proccessing Here
+
     showToast("✅ Done", "success");
     setTimeout(() => {
       toastMessage = null;
       clear();
     }, 1500);
-  }
-
-  function generateMaterialTags(
-    materialTable: Record<string, MaterialInfo[]>
-  ): Record<number, string> {
-    // Flatten: For each group and its array, create entries with group and item
-    const entries = Object.entries(materialTable).flatMap(([group, items]) =>
-      items.map((item) => ({
-        group,
-        item,
-      }))
-    );
-
-    // Group by matId
-    const grouped = entries.reduce(
-      (acc, { group, item }) => {
-        if (!acc[item.matId]) {
-          acc[item.matId] = [];
-        }
-        acc[item.matId].push(`${group}&&&${item.qty}`);
-        return acc;
-      },
-      {} as Record<number, string[]>
-    );
-
-    // Convert array to joined string with '||'
-    const materialTags: Record<number, string> = {};
-    for (const matIdStr in grouped) {
-      materialTags[Number(matIdStr)] = grouped[matIdStr].join("||");
-    }
-
-    return materialTags;
   }
 
   let toastMessage: string | null = null;
