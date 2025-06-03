@@ -92,7 +92,7 @@ namespace ItemDescTableModder
                         foreach (var instanceInfo in instanceInfos)
                         {
                             var info = instanceInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                            newDescList.Add(DynValue.NewString($"^{_config.InstanceConfig.DescriptionRowsColor}{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
+                            newDescList.Add(DynValue.NewString($"^{_config.InstanceConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
                         }
                         AddDescriptionsToTop(ref descriptionTable, newDescList);
                     }
@@ -124,7 +124,7 @@ namespace ItemDescTableModder
                         foreach (var questInfo in questInfos)
                         {
                             var info = questInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                            newDescList.Add(DynValue.NewString($"^{_config.QuestConfig.DescriptionRowsColor}{info[0].Trim()} - Amount: {info[1].Trim()}^000000"));
+                            newDescList.Add(DynValue.NewString($"^{_config.QuestConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
                         }
                         AddDescriptionsToTop(ref descriptionTable, newDescList);
                     }
