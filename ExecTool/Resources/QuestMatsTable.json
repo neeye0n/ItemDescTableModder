@@ -514,5 +514,49 @@
       "matId": 6827,
       "qty": 17
     }
+  ],
+  "Skin of Gwiber": [
+    {
+      "matId": 2504,
+      "qty": 1
+    },
+    {
+      "matId": 7442,
+      "qty": 10
+    },
+    {
+      "matId": 7751,
+      "qty": 50
+    },
+    {
+      "matId": 7063,
+      "qty": 50
+    },
+    {
+      "matId": 1001253,
+      "qty": 5
+    }
+  ],
+  "Boots of Gwiber": [
+    {
+      "matId": 2406,
+      "qty": 1
+    },
+    {
+      "matId": 7442,
+      "qty": 10
+    },
+    {
+      "matId": 7751,
+      "qty": 50
+    },
+    {
+      "matId": 7063,
+      "qty": 50
+    },
+    {
+      "matId": 1001253,
+      "qty": 5
+    }
   ]
 }

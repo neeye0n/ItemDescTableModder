@@ -45,6 +45,23 @@
       "qty": 45
     }
   ],
+  "Beelzebub": [
+    {
+      "matId": 7752,
+      "matName": "Clattering Skull",
+      "qty": 50
+    },
+    {
+      "matId": 7751,
+      "matName": "Old White Cloth",
+      "qty": 10
+    },
+    {
+      "matId": 7117,
+      "matName": "Torn Magic Book",
+      "qty": 5
+    }
+  ],
   "Bio3 MVPs": [
     {
       "matId": 7345,
@@ -171,6 +188,23 @@
       "matId": 7165,
       "matName": "Transparent Celestial Robe",
       "qty": 30
+    }
+  ],
+  "Fallen Bishop": [
+    {
+      "matId": 7752,
+      "matName": "Clattering Skull",
+      "qty": 20
+    },
+    {
+      "matId": 7753,
+      "matName": "Broken Farming Utensil",
+      "qty": 20
+    },
+    {
+      "matId": 7117,
+      "matName": "Torn Magic Book",
+      "qty": 5
     }
   ],
   "Garm": [

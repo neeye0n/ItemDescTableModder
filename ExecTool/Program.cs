@@ -9,7 +9,7 @@ namespace ItemDescTableModder
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             string executableDirectory = Environment.CurrentDirectory;
 
@@ -35,6 +35,12 @@ namespace ItemDescTableModder
             var config = configLoader.Load();
 
             // Setup DI
+            services.AddHttpClient("ItemDescTableModder", client =>
+            {
+                client.Timeout = TimeSpan.FromMinutes(3);
+                client.BaseAddress = new Uri("https://neeye0n.github.io/flux/ItemDescTableModder/");
+            });
+
             services
                 .RemoveAll<IConfigLoader>()
                 .AddSingleton(Options.Create(config))
@@ -56,8 +62,8 @@ namespace ItemDescTableModder
 
                     string filePath = args[0];
                     logger.LogInformation("Processing file: {filePath}", Path.GetFileName(filePath));
-                    app.ProcessFile(filePath);
-                    logger.LogInformation("Processing completed successfully.");
+                    await app.ProcessFile(filePath);
+                    logger.LogInformation("Processing completed.");
                 }
                 else
                 {
