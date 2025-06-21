@@ -7,6 +7,7 @@ This lets you add helpful tags and details to item names and descriptions to mak
 ---
 
 ## 📦 How to Use
+
 <img src="Misc/Doc/how-to-use.gif" width="100%" />
 
 1. **Make a backup of your current `itemInfo_EN.lua` file**, just in case you want to restore it later.  
@@ -21,9 +22,24 @@ This lets you add helpful tags and details to item names and descriptions to mak
 
 ---
 
+## 🧰 Requirements
+
+Before you start, make sure you have:
+
+- ✅ A stable **internet connection**  
+  _(Needed to fetch data that the tool will use)_
+
+- ✅ **.NET 8 Runtime** installed  
+  [Download it here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)  
+  _(Choose the “Run apps” version for your system — Windows x64 in most cases)_
+
+> 💡 _Not sure if you already have .NET 8?_  
+> Just run the tool — if it doesn't launch, install the runtime above and try again!
+
 ## ✨ Features
 
 ### 🏷️ Item Name Modifications
+
 - `[Brew]` — for materials used in Potion/Poison creation (based on RMS Creation DB)
 - `[Cook]` — for Lv7–10 stat food ingredients
 - `[Quest]` — for server-exclusive quest item crafting materials
@@ -31,6 +47,7 @@ This lets you add helpful tags and details to item names and descriptions to mak
   _Example: `Steel (Vesper - 5)`_
 
 ### 📝 Description Additions
+
 - **Item ID** — now displayed for easy reference
 - `[Brewing Material]` — for crafting ingredients
 - `[Cooking Material]` — with a list of related stat foods
@@ -38,6 +55,7 @@ This lets you add helpful tags and details to item names and descriptions to mak
 - `[Instance Material]` — listing relevant MVP instances where it’s needed
 
 ### 🖼️ Samples
+
 _(Sample images shown may become **outdated** as new features are added)_
 
 <p float="left">
@@ -52,6 +70,7 @@ _(Sample images shown may become **outdated** as new features are added)_
 ---
 
 ## ⚙️ Configuration
+
 Want to customize which tags show up or change text colors?
 
 You can tweak the behavior of the tool using the included `ItemDescTableModder.conf` file.
@@ -69,6 +88,7 @@ You can tweak the behavior of the tool using the included `ItemDescTableModder.c
 _(or open `ItemDescTableModder.conf` directly in your editor to start customizing)_
 
 ---
+
 ## 🛡️ Tips & Reminders
 
 - **Always back up** your original `itemInfo_EN.lua` before making any changes.
@@ -76,4 +96,5 @@ _(or open `ItemDescTableModder.conf` directly in your editor to start customizin
 - **Note:** Future game patches may **automatically overwrite** your modified `itemInfo_EN.lua`. If that happens, just run this tool again to reapply the changes.
 
 ---
+
 Feel free to contribute or suggest improvements.
