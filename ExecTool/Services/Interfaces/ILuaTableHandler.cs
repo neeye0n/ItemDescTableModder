@@ -10,7 +10,7 @@ namespace ItemDescTableModder.Services.Interfaces
         /// <param name="filePath">Path to the Lua file</param>
         /// <param name="tableIdentifier">The name of the table in the Lua file</param>
         /// <returns>The loaded Lua table model</returns>
-        LuaTableModel LoadFile(string filePath, string tableIdentifier = "tbl");
+        LuaTableModel? LoadFile(string filePath, string tableIdentifier = "tbl");
 
         /// <summary>
         /// Saves a Lua table model to a file

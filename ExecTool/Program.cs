@@ -37,9 +37,9 @@ namespace ItemDescTableModder
             // Setup DI
             services.AddHttpClient("ItemDescTableModder", client =>
             {
-                client.Timeout = TimeSpan.FromMinutes(3);
+                client.Timeout = TimeSpan.FromMinutes(5);
                 client.BaseAddress = new Uri("https://neeye0n.github.io/flux/ItemDescTableModder/");
-            });
+            }).RemoveAllLoggers();
 
             services
                 .RemoveAll<IConfigLoader>()

@@ -54,6 +54,13 @@ namespace ItemDescTableModder
             try
             {
                 var table = _tableHandler.LoadFile(filePath, "tbl");
+                if (table is null)
+                {
+                    _logger.LogInformation("File has already been processed. Aborting...");
+                    return;
+                }
+
+                _logger.LogInformation("File has been loaded...");
                 var allItemIds = _tableModifier.GetItemIds(table);
                 var instanceTags = await GenerateMaterialTags(_instanceMatsTable);
                 var brewingTags = await GenerateMaterialTags(_brewMatsTable);
@@ -202,7 +209,7 @@ namespace ItemDescTableModder
                      {
                          var newDescList = new List<DynValue>
                          {
-                        DynValue.NewString($"^{_config.ItemIdDescTextColor}Item ID:^{_config.ItemIdDescValueColor} {itemId}^000000")
+                             DynValue.NewString($"^{_config.ItemIdDescTextColor}Item ID:^{_config.ItemIdDescValueColor} {itemId}^000000")
                          };
 
                          var descriptionTable = item.Get("identifiedDescriptionName").Table;
@@ -223,6 +230,7 @@ namespace ItemDescTableModder
         {
             try
             {
+                _logger.LogInformation("Reading from {address}", string.Concat(_httpClient.BaseAddress, resourceName));
                 string json = await _httpClient.GetStringAsync(resourceName);
                 var materialTable = JsonSerializer.Deserialize<Dictionary<string, List<MaterialInfo>>>(json);
 
@@ -246,11 +254,11 @@ namespace ItemDescTableModder
             }
             catch (HttpRequestException ex)
             {
-                throw new InvalidOperationException($"Failed to fetch JSON file '{resourceName}': {ex.Message}", ex);
+                throw new InvalidOperationException($"Failed to fetch json file '{resourceName}': {ex.Message}", ex);
             }
             catch (JsonException ex)
             {
-                throw new InvalidDataException($"Invalid JSON format in file '{resourceName}': {ex.Message}", ex);
+                throw new InvalidDataException($"Invalid json format in file '{resourceName}': {ex.Message}", ex);
             }
         }
 

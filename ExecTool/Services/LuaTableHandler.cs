@@ -1,18 +1,24 @@
 ﻿using ItemDescTableModder.Models;
 using ItemDescTableModder.Services.Interfaces;
 using MoonSharp.Interpreter;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ItemDescTableModder.Services
 {
     public class LuaTableHandler(ILuaTableSerializer serializer) : LuaServiceBase(), ILuaTableHandler
     {
+        private readonly string HandlerSignature = "-- Processed By ItemDescTableModder";
         private readonly ILuaTableSerializer _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
 
-        public LuaTableModel LoadFile(string filePath, string tableIdentifier = "tbl")
+        public LuaTableModel? LoadFile(string filePath, string tableIdentifier = "tbl")
         {
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentNullException(nameof(filePath));
+
+            bool isProcessed = File.ReadAllLines(filePath)[0].Equals(HandlerSignature);
+            if (isProcessed)
+                return null;
 
             // Read with proper encoding
             string content = File.ReadAllText(filePath, Encoding);
@@ -45,8 +51,11 @@ namespace ItemDescTableModder.Services
         private string RebuildLuaFile(LuaTableModel model)
         {
             // 1. Preserve everything before the table
+            StringBuilder preTableContent = new();
+            // Simple Signing
+            preTableContent.AppendLine(HandlerSignature);
             var preTableMatch = Regex.Match(model.OriginalContent, @"^(.*?)\b" + model.TableIdentifier + @"\s*=\s*\{", RegexOptions.Singleline);
-            string preTableContent = preTableMatch.Success ? preTableMatch.Groups[1].Value : string.Empty;
+            preTableContent.Append(preTableMatch.Success ? preTableMatch.Groups[1].Value : string.Empty);
 
             // 2. Generate the new table content
             string tableContent = _serializer.GenerateTableContent(model.TableData);
