@@ -78,7 +78,7 @@ namespace ItemDescTableModder
                 // Instance
                 // Pet
 
-                //Apply Pet
+                // Apply Pet Evo 
                 _logger.LogInformation("Applying Pet descriptions and tags...");
                 foreach (var kvp in petEvoTags)
                 {
@@ -87,6 +87,7 @@ namespace ItemDescTableModder
                         var petEvoInfos = kvp.Value.Split("||");
                         if (petEvoInfos.Length == 0)
                             return;
+
                         if (_config.PetEvoConfig.EnableTags != 0)
                         {
                             var displayName = item.Get("identifiedDisplayName").String;
@@ -101,7 +102,7 @@ namespace ItemDescTableModder
                             foreach (var instanceInfo in petEvoInfos)
                             {
                                 var info = instanceInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                                newDescList.Add(DynValue.NewString($"^{_config.InstanceConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
+                                newDescList.Add(DynValue.NewString($"^{_config.PetEvoConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
                             }
                             AddDescriptionsToTop(ref descriptionTable, newDescList);
                         }
