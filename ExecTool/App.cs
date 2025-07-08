@@ -3,7 +3,6 @@ using ItemDescTableModder.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MoonSharp.Interpreter;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -14,7 +13,7 @@ namespace ItemDescTableModder
         Task ProcessFile(string filePath);
     }
 
-    public class App : IApp
+    public partial class App : IApp
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<App> _logger;
@@ -24,12 +23,15 @@ namespace ItemDescTableModder
         private readonly string _workingDir;
         private readonly string _outputDirectory;
         private readonly string _outputFilename;
-        private readonly string _instanceMatsTable;
-        private readonly string _brewMatsTable;
-        private readonly string _questMatsTable;
-        private readonly string _cookinMatsTable;
-        private readonly string _petMatsTable;
 
+        private readonly Dictionary<string, string> _materialFiles = new()
+        {
+            { "Brewing", "brewingMatsTable.json" },
+            { "Cooking", "cookingMatsTable.json" },
+            { "Quest", "questMatsTable.json" },
+            { "Instance", "instanceMatsTable.json" },
+            { "PetEvo", "petEvoMatsTable.json" },
+        };
         public App(IHttpClientFactory factory, ILogger<App> logger, ILuaTableHandler tableHandler, ILuaTableModifier tableModifier, string executableDirectory, IOptions<Config> config)
         {
             _httpClient = factory.CreateClient("ItemDescTableModder");
@@ -38,13 +40,6 @@ namespace ItemDescTableModder
             _tableModifier = tableModifier;
             _outputFilename = "itemInfo_EN.lua";
             _outputDirectory = "System";
-
-            _instanceMatsTable = "instanceMatsTable.json";
-            _brewMatsTable = "brewingMatsTable.json";
-            _questMatsTable = "questMatsTable.json";
-            _cookinMatsTable = "cookingMatsTable.json";
-            _petMatsTable = "petEvoMatsTable.json";
-
             _workingDir = executableDirectory;
             _config = config.Value;
         }
@@ -52,7 +47,6 @@ namespace ItemDescTableModder
         public async Task ProcessFile(string filePath)
         {
             _logger.LogInformation("Starting to process the file...");
-
             try
             {
                 var table = _tableHandler.LoadFile(filePath, "tbl");
@@ -64,192 +58,27 @@ namespace ItemDescTableModder
 
                 _logger.LogInformation("File has been loaded...");
                 var allItemIds = _tableModifier.GetItemIds(table);
-                var instanceTags = await GenerateMaterialTags(_instanceMatsTable);
-                var brewingTags = await GenerateMaterialTags(_brewMatsTable);
-                var questTags = await GenerateMaterialTags(_questMatsTable);
-                var cookingTags = await GenerateMaterialTags(_cookinMatsTable);
-                var petEvoTags = await GenerateMaterialTags(_petMatsTable);
 
-                // Order of Precedence:
-                // ItemId
-                // Brewing
-                // Cooking
-                // Quest
-                // Instance
-                // Pet
-
-                // Apply Pet Evo 
-                _logger.LogInformation("Applying Pet descriptions and tags...");
-                foreach (var kvp in petEvoTags)
+                // Load material tag mappings
+                var materialTags = new Dictionary<string, Dictionary<int, string>>();
+                foreach (var kvp in _materialFiles)
                 {
-                    _tableModifier.ModifyItem(table, kvp.Key, item =>
-                    {
-                        var petEvoInfos = kvp.Value.Split("||");
-                        if (petEvoInfos.Length == 0)
-                            return;
-
-                        if (_config.PetEvoConfig.EnableTags != 0)
-                        {
-                            var displayName = item.Get("identifiedDisplayName").String;
-                            var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                            item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.PetEvoConfig.TagText}]" + startingSpace + displayName.Trim()));
-                        }
-                        if (_config.PetEvoConfig.EnableDescriptions != 0)
-                        {
-                            var descriptionTable = item.Get("identifiedDescriptionName").Table;
-
-                            List<DynValue> newDescList = [DynValue.NewString($"^{_config.PetEvoConfig.DescriptionHeaderColor}[Pet Evo Material]^000000")];
-                            foreach (var instanceInfo in petEvoInfos)
-                            {
-                                var info = instanceInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                                newDescList.Add(DynValue.NewString($"^{_config.PetEvoConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
-                            }
-                            AddDescriptionsToTop(ref descriptionTable, newDescList);
-                        }
-                    });
+                    materialTags[kvp.Key] = await GenerateMaterialTags(kvp.Value);
                 }
 
-                // Apply Instance
-                _logger.LogInformation("Applying Instance descriptions and tags...");
-                foreach (var kvp in instanceTags)
-                {
-                    _tableModifier.ModifyItem(table, kvp.Key, item =>
-                    {
-                        var instanceInfos = kvp.Value.Split("||");
-                        if (instanceInfos.Length == 0)
-                            return;
-
-                        if (_config.InstanceConfig.EnableTags != 0)
-                        {
-                            var instanceTags = string.Join(", ", instanceInfos.Select(item =>
-                            {
-                                var parts = item.Split("&&&", StringSplitOptions.TrimEntries);
-                                return $"{parts[0]} - {parts[1]}";
-                            }));
-
-                            var displayName = item.Get("identifiedDisplayName").String;
-                            item.Set("identifiedDisplayName", DynValue.NewString(displayName.Trim() + " (" + instanceTags + ")"));
-                        }
-
-                        if (_config.InstanceConfig.EnableDescriptions != 0)
-                        {
-                            var descriptionTable = item.Get("identifiedDescriptionName").Table;
-
-                            List<DynValue> newDescList = [DynValue.NewString($"^{_config.InstanceConfig.DescriptionHeaderColor}[Instance Material]^000000")];
-                            foreach (var instanceInfo in instanceInfos)
-                            {
-                                var info = instanceInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                                newDescList.Add(DynValue.NewString($"^{_config.InstanceConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
-                            }
-                            AddDescriptionsToTop(ref descriptionTable, newDescList);
-                        }
-                    });
-                }
-
-                // Apply Quest
-                _logger.LogInformation("Applying Quest descriptions and tags...");
-                foreach (var kvp in questTags)
-                {
-                    _tableModifier.ModifyItem(table, kvp.Key, item =>
-                    {
-                        var questInfos = kvp.Value.Split("||");
-                        if (questInfos.Length == 0)
-                            return;
-
-                        if (_config.QuestConfig.EnableTags != 0)
-                        {
-                            var displayName = item.Get("identifiedDisplayName").String;
-                            var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                            item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.QuestConfig.TagText}]" + startingSpace + displayName.Trim()));
-                        }
-
-                        if (_config.QuestConfig.EnableDescriptions != 0)
-                        {
-                            var descriptionTable = item.Get("identifiedDescriptionName").Table;
-
-                            List<DynValue> newDescList = [DynValue.NewString($"^{_config.QuestConfig.DescriptionHeaderColor}[Quest Material]^000000")];
-                            foreach (var questInfo in questInfos)
-                            {
-                                var info = questInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                                newDescList.Add(DynValue.NewString($"^{_config.QuestConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
-                            }
-                            AddDescriptionsToTop(ref descriptionTable, newDescList);
-                        }
-                    });
-                }
-
-                // Apply Cooking
-                _logger.LogInformation("Applying Cooking descriptions and tags...");
-                foreach (var kvp in cookingTags)
-                {
-                    _tableModifier.ModifyItem(table, kvp.Key, item =>
-                    {
-                        var cookingInfos = kvp.Value.Split("||");
-                        if (cookingInfos.Length == 0)
-                            return;
-
-                        if (_config.CookingConfig.EnableTags != 0)
-                        {
-                            var displayName = item.Get("identifiedDisplayName").String;
-                            var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                            item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.CookingConfig.TagText}]" + startingSpace + displayName.Trim()));
-                        }
-
-                        if (_config.CookingConfig.EnableDescriptions != 0)
-                        {
-                            var descriptionTable = item.Get("identifiedDescriptionName").Table;
-
-                            List<DynValue> newDescList = [DynValue.NewString($"^{_config.CookingConfig.DescriptionHeaderColor}[Cooking Material]^000000")];
-                            foreach (var cookingInfo in cookingInfos)
-                            {
-                                var info = cookingInfo.Split("&&&", StringSplitOptions.TrimEntries);
-                                newDescList.Add(DynValue.NewString($"^{_config.CookingConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
-                            }
-                            AddDescriptionsToTop(ref descriptionTable, newDescList);
-                        }
-                    });
-                }
-
-                // Apply Brewing
-                _logger.LogInformation("Applying Brewing descriptions and tags...");
-                foreach (var kvp in brewingTags)
-                {
-                    _tableModifier.ModifyItem(table, kvp.Key, item =>
-                    {
-                        //var brewingInfos = kvp.Value.Split("||");
-                        //if (brewingInfos.Length == 0)
-                        //    return;
-                        if (_config.BrewingConfig.EnableTags != 0)
-                        {
-                            var displayName = item.Get("identifiedDisplayName").String;
-                            var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
-                            item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.BrewingConfig.TagText}]" + startingSpace + displayName.Trim()));
-                        }
-
-                        if (_config.BrewingConfig.EnableDescriptions != 0)
-                        {
-                            var descriptionTable = item.Get("identifiedDescriptionName").Table;
-                            AddDescriptionsToTop(ref descriptionTable, [
-                                DynValue.NewString($"^{_config.BrewingConfig.DescriptionHeaderColor}[Brewing Material]^000000")
-                            ]);
-                        }
-                    });
-                }
-
-                // Apply Item Ids
-                _logger.LogInformation("Applying Item IDs descriptions...");
+                _logger.LogInformation("Applying Tags and Descriptions...");
                 foreach (var itemId in allItemIds)
                 {
                     _tableModifier.ModifyItem(table, itemId, item =>
-                     {
-                         var newDescList = new List<DynValue>
-                         {
-                             DynValue.NewString($"^{_config.ItemIdDescTextColor}Item ID:^{_config.ItemIdDescValueColor} {itemId}^000000")
-                         };
+                    {
+                        var originalDisplayName = item.Get("identifiedDisplayName").String;
+                        var update = BuildItemUpdate(itemId, originalDisplayName, materialTags);
 
-                         var descriptionTable = item.Get("identifiedDescriptionName").Table;
-                         AddDescriptionsToTop(ref descriptionTable, newDescList);
-                     });
+                        item.Set("identifiedDisplayName", DynValue.NewString(update.DisplayName));
+
+                        var descriptionTable = item.Get("identifiedDescriptionName").Table;
+                        AddDescriptionsToTop(ref descriptionTable, update.Descriptions);
+                    });
                 }
 
                 _tableHandler.SaveToFile(table, GetOutputFullPath());
@@ -259,6 +88,90 @@ namespace ItemDescTableModder
             {
                 _logger.LogCritical(ex, "An uxexpected error has occurred. The application will terminate.");
             }
+        }
+
+        private ItemUpdate BuildItemUpdate(int itemId, string originalDisplayName, Dictionary<string, Dictionary<int, string>> materialTags)
+        {
+            string updatedName = originalDisplayName?.Trim() ?? string.Empty;
+
+            var tagStack = new List<string>();
+            var newDescriptions = new List<DynValue>
+            {
+                // Always add ItemId first to descriptions
+                DynValue.NewString($"^{_config.ItemIdDescTextColor}Item ID:^{_config.ItemIdDescValueColor} {itemId}^000000")
+            };
+
+            foreach (var materialType in _materialFiles.Keys)
+            {
+                var config = GetMaterialConfig(materialType);
+                if (config is null) continue;
+
+                if (materialTags[materialType].TryGetValue(itemId, out var materialInfo))
+                {
+                    // Collect tags for non-Instance materials
+                    if (config.EnableTags != 0 && materialType != "Instance")
+                    {
+                        tagStack.Add($"[{config.TagText}]");
+                    }
+
+                    // Build descriptions
+                    if (config.EnableDescriptions != 0)
+                    {
+                        newDescriptions.Add(DynValue.NewString($"^{config.DescriptionHeaderColor}[{config.HeaderText}]^000000"));
+
+                        if (config.EnableDetailedDescriptions != 0)
+                        {
+                            foreach (var entry in materialInfo.Split("||"))
+                            {
+                                var parts = entry.Split("&&&", StringSplitOptions.TrimEntries);
+                                if (parts.Length >= 2)
+                                {
+                                    var detailLine = $"^{config.DescriptionRowsColor}{parts[0]} - Qty: {parts[1]}^000000";
+                                    newDescriptions.Add(DynValue.NewString(detailLine));
+                                }
+                            }
+                        }
+                    }
+
+                    // Special handling for Instance tags
+                    if (config.EnableTags != 0 && materialType == "Instance")
+                    {
+                        var instanceTag = string.Join(", ", materialInfo.Split("||").Select(info =>
+                        {
+                            var parts = info.Split("&&&", StringSplitOptions.TrimEntries);
+                            return $"{parts[0]} - {parts[1]}";
+                        }));
+
+                        updatedName = $"{updatedName} ({instanceTag})";
+                    }
+                }
+            }
+
+            // Prepend all collected tags in left-to-right order
+            if (tagStack.Count > 0)
+            {
+                var joinedTags = string.Join("", tagStack);
+                var startingSpace = TagTextRegEx().IsMatch(updatedName) ? "" : " ";
+                updatedName = $"{joinedTags}{startingSpace}{updatedName}".Trim();
+            }
+
+            // Blank space after custom descriptions
+            newDescriptions.Add(DynValue.NewString(" "));
+            return new ItemUpdate(updatedName, newDescriptions);
+        }
+
+
+        private TaggingConfig? GetMaterialConfig(string materialType)
+        {
+            return materialType switch
+            {
+                "Brewing" => _config.BrewingConfig,
+                "Cooking" => _config.CookingConfig,
+                "Quest" => _config.QuestConfig,
+                "Instance" => _config.InstanceConfig,
+                "PetEvo" => _config.PetEvoConfig,
+                _ => null
+            };
         }
 
         private async Task<Dictionary<int, string>> GenerateMaterialTags(string resourceName)
@@ -337,5 +250,10 @@ namespace ItemDescTableModder
                 descTable.Append(desc);
             }
         }
+
+        private record ItemUpdate(string DisplayName, List<DynValue> Descriptions);
+
+        [GeneratedRegex(@"^(?:\[[^\]]*\])+")]
+        private static partial Regex TagTextRegEx();
     }
 }

@@ -64,7 +64,9 @@ namespace ItemDescTableModder
                 {
                     EnableTags = 1,
                     EnableDescriptions = 1,
+                    EnableDetailedDescriptions = 0,
                     TagText = "Brew",
+                    HeaderText = "Brewing Material",
                     DescriptionHeaderColor = "00897B",
                     DescriptionRowsColor = "43A047"
                 },
@@ -72,7 +74,9 @@ namespace ItemDescTableModder
                 {
                     EnableTags = 1,
                     EnableDescriptions = 1,
+                    EnableDetailedDescriptions = 0,
                     TagText = "Cook",
+                    HeaderText = "Cooking Material",
                     DescriptionHeaderColor = "EF6C00",
                     DescriptionRowsColor = "6D4C41"
                 },
@@ -80,7 +84,9 @@ namespace ItemDescTableModder
                 {
                     EnableTags = 1,
                     EnableDescriptions = 1,
+                    EnableDetailedDescriptions = 1,
                     TagText = "Quest",
+                    HeaderText = "Quest Requirement",
                     DescriptionHeaderColor = "5E35B1",
                     DescriptionRowsColor = "8E24AA"
                 },
@@ -88,7 +94,9 @@ namespace ItemDescTableModder
                 {
                     EnableTags = 1,
                     EnableDescriptions = 1,
+                    EnableDetailedDescriptions = 1,
                     TagText = "Instance",
+                    HeaderText = "Instance Requirement",
                     DescriptionHeaderColor = "C62828",
                     DescriptionRowsColor = "D84315"
                 },
@@ -96,7 +104,9 @@ namespace ItemDescTableModder
                 {
                     EnableTags = 1,
                     EnableDescriptions = 1,
+                    EnableDetailedDescriptions = 1,
                     TagText = "PetEvo",
+                    HeaderText = "Pet Evo Material",
                     DescriptionHeaderColor = "5C6BC0",
                     DescriptionRowsColor = "7986CB"
                 }
