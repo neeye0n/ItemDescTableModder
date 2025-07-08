@@ -97,8 +97,8 @@ namespace ItemDescTableModder
                     EnableTags = 1,
                     EnableDescriptions = 1,
                     TagText = "PetEvo",
-                    DescriptionHeaderColor = "AB47BC",
-                    DescriptionRowsColor = "CE93D8"
+                    DescriptionHeaderColor = "5C6BC0",
+                    DescriptionRowsColor = "7986CB"
                 }
             };
         }
