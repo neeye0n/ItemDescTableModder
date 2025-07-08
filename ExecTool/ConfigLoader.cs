@@ -91,6 +91,14 @@ namespace ItemDescTableModder
                     TagText = "Instance",
                     DescriptionHeaderColor = "C62828",
                     DescriptionRowsColor = "D84315"
+                },
+                PetEvoConfig = new TaggingConfig
+                {
+                    EnableTags = 1,
+                    EnableDescriptions = 1,
+                    TagText = "PetEvo",
+                    DescriptionHeaderColor = "0e86ab", 
+                    DescriptionRowsColor = "21a6cf"
                 }
             };
         }

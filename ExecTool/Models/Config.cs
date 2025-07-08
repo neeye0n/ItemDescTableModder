@@ -17,6 +17,9 @@ namespace ItemDescTableModder.Models
         [JsonProperty(Required = Required.Always)]
         public TaggingConfig InstanceConfig { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
+        public TaggingConfig PetEvoConfig { get; set; }
+
         [JsonConstructor]
         public Config() { }
 

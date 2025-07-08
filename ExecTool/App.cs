@@ -28,6 +28,7 @@ namespace ItemDescTableModder
         private readonly string _brewMatsTable;
         private readonly string _questMatsTable;
         private readonly string _cookinMatsTable;
+        private readonly string _petMatsTable;
 
         public App(IHttpClientFactory factory, ILogger<App> logger, ILuaTableHandler tableHandler, ILuaTableModifier tableModifier, string executableDirectory, IOptions<Config> config)
         {
@@ -42,6 +43,7 @@ namespace ItemDescTableModder
             _brewMatsTable = "brewingMatsTable.json";
             _questMatsTable = "questMatsTable.json";
             _cookinMatsTable = "cookingMatsTable.json";
+            _petMatsTable = "petEvoMatsTable.json";
 
             _workingDir = executableDirectory;
             _config = config.Value;
@@ -66,6 +68,7 @@ namespace ItemDescTableModder
                 var brewingTags = await GenerateMaterialTags(_brewMatsTable);
                 var questTags = await GenerateMaterialTags(_questMatsTable);
                 var cookingTags = await GenerateMaterialTags(_cookinMatsTable);
+                var petEvoTags = await GenerateMaterialTags(_petMatsTable);
 
                 // Order of Precedence:
                 // ItemId
@@ -73,6 +76,37 @@ namespace ItemDescTableModder
                 // Cooking
                 // Quest
                 // Instance
+                // Pet
+
+                //Apply Pet
+                _logger.LogInformation("Applying Pet descriptions and tags...");
+                foreach (var kvp in petEvoTags)
+                {
+                    _tableModifier.ModifyItem(table, kvp.Key, item =>
+                    {
+                        var petEvoInfos = kvp.Value.Split("||");
+                        if (petEvoInfos.Length == 0)
+                            return;
+                        if (_config.PetEvoConfig.EnableTags != 0)
+                        {
+                            var displayName = item.Get("identifiedDisplayName").String;
+                            var startingSpace = Regex.IsMatch(displayName, @"^(?:\[[^\]]*\])+") ? "" : " ";
+                            item.Set("identifiedDisplayName", DynValue.NewString($"[{_config.PetEvoConfig.TagText}]" + startingSpace + displayName.Trim()));
+                        }
+                        if (_config.PetEvoConfig.EnableDescriptions != 0)
+                        {
+                            var descriptionTable = item.Get("identifiedDescriptionName").Table;
+
+                            List<DynValue> newDescList = [DynValue.NewString($"^{_config.PetEvoConfig.DescriptionHeaderColor}[Pet Evo Material]^000000")];
+                            foreach (var instanceInfo in petEvoInfos)
+                            {
+                                var info = instanceInfo.Split("&&&", StringSplitOptions.TrimEntries);
+                                newDescList.Add(DynValue.NewString($"^{_config.InstanceConfig.DescriptionRowsColor}{info[0].Trim()} - Qty: {info[1].Trim()}^000000"));
+                            }
+                            AddDescriptionsToTop(ref descriptionTable, newDescList);
+                        }
+                    });
+                }
 
                 // Apply Instance
                 _logger.LogInformation("Applying Instance descriptions and tags...");
