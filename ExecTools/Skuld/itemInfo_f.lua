@@ -4,8 +4,28 @@
 -- This file shouldn't be claimed as part of your project, unless you fork it from https://github.com/llchrisll/ROenglishRE
 -- Last updated: 20250515
 
--- Load custom made itemAnnotations.lua
-dofile("System/LuaFiles514/itemAnnotations.lua")
+-- Try loading itemAnnotations.lua
+local itemAnnotationsEnabled = false
+local itemAnnotationsFilePath = "System/LuaFiles514/itemAnnotations.lua"
+local annotationFile = io.open(itemAnnotationsFilePath, "r")
+if annotationFile then
+    annotationFile:close()
+
+    dofile(itemAnnotationsFilePath)
+    itemAnnotationsEnabled = true
+end
+
+-- Try loading cardPreviews.lua
+local cardPreviewsEnabled = false
+local cardPreviewsFilePath = "System/LuaFiles514/cardPreviews.lua"
+local cardPreviewFile = io.open(cardPreviewsFilePath, "r")
+if cardPreviewFile then
+    cardPreviewFile:close()
+
+    dofile(cardPreviewsFilePath)
+    cardPreviewsEnabled = true
+end
+
 
 local function trim(s)
     return s:match("^%s*(.-)%s*$")
@@ -15,16 +35,28 @@ local customServerItemDb = "Elegy"
 
 function main()
 	for ItemID, DESC in pairs(tbl) do
-		
+
+		-- START Card Mini Preview
+		if cardPreviewsEnabled then
+			if DESC.identifiedResourceName == "이름없는카드" then
+				if cardPreviews[ItemID] ~= nil and cardPreviews[ItemID].identifiedResourceName ~= "sorry" then
+					DESC.identifiedResourceName = cardPreviews[ItemID].identifiedResourceName
+				end
+			end
+		end
+		-- END START Card Mini Preview
+
 		-- Read and apply suffix to DESC.identifiedDisplayName
 		local displayName = DESC.identifiedDisplayName
-		local ann = itemAnnotations[ItemID]
-		if ann ~= nil then
-			if ann.nameTagPrefix ~= nil and ann.nameTagPrefix ~= "" then
-				displayName = trim(ann.nameTagPrefix) .. " " .. trim(displayName)
-			end
-			if ann.nameTagSuffix ~= nil and ann.nameTagSuffix ~= "" then
-				displayName = trim(displayName) .. " " .. trim(ann.nameTagSuffix)
+		if itemAnnotationsEnabled then
+			local ann = itemAnnotations[ItemID]
+			if ann ~= nil then
+				if ann.nameTagPrefix ~= nil and ann.nameTagPrefix ~= "" then
+					displayName = trim(ann.nameTagPrefix) .. " " .. trim(displayName)
+				end
+				if ann.nameTagSuffix ~= nil and ann.nameTagSuffix ~= "" then
+					displayName = trim(displayName) .. " " .. trim(ann.nameTagSuffix)
+				end
 			end
 		end
 
@@ -70,9 +102,11 @@ function main()
 			end
 
 			-- START Read and Apply item annotations
-			if itemAnnotations ~= nil and itemAnnotations[ItemID] ~= nil and itemAnnotations[ItemID].descLines ~= nil then
-				for _, line in ipairs(itemAnnotations[ItemID].descLines) do
-					AddItemIdentifiedDesc(ItemID, line)
+			if itemAnnotationsEnabled then
+				if itemAnnotations ~= nil and itemAnnotations[ItemID] ~= nil and itemAnnotations[ItemID].descLines ~= nil then
+					for _, line in ipairs(itemAnnotations[ItemID].descLines) do
+						AddItemIdentifiedDesc(ItemID, line)
+					end
 				end
 			end
 			-- END Read and Apply item annotations
@@ -92,23 +126,25 @@ function main()
 			end
 		end
 		-- START Print Item ID first before other descriptions
-		if (DisplayServer == 3 and DESC.Server ~= nil) or (DisplayCustomServer == 3 and DESC.Custom == true) or DisplayItemID == 2 or DisplayDatabase == true or DisplayCustomDB == true then
-			if DisplayDatabase == true or DisplayCustomDB == true then
-				if DisplayDatabase == true and DESC.Custom == nil then
-					local Database = ItemDatabase[customServerItemDb]
-					if DESC.Server ~= nil and ItemDatabase[DESC.Server] ~= nil then
-						Database = ItemDatabase[DESC.Server]
+		if itemAnnotationsEnabled then
+			if (DisplayServer == 3 and DESC.Server ~= nil) or (DisplayCustomServer == 3 and DESC.Custom == true) or DisplayItemID == 2 or DisplayDatabase == true or DisplayCustomDB == true then
+				if DisplayDatabase == true or DisplayCustomDB == true then
+					if DisplayDatabase == true and DESC.Custom == nil then
+						local Database = ItemDatabase[customServerItemDb]
+						if DESC.Server ~= nil and ItemDatabase[DESC.Server] ~= nil then
+							Database = ItemDatabase[DESC.Server]
+						end
+					-- START Unify Item ID and Item Url
+						-- AddItemIdentifiedDesc(ItemID, "<URL>" .. Database.Name .. "<INFO>" .. Database.URL .. ItemID .. "</INFO></URL>")
+						AddItemIdentifiedDesc(ItemID, "^0000CCID:^000000 <URL>" .. ItemID .. "<INFO>" .. Database.URL .. ItemID .. "</INFO></URL>")
+					elseif DisplayCustomDB == true and DESC.Custom == true then
+						-- AddItemIdentifiedDesc(ItemID, "<URL>" .. ItemDatabase["Custom"].Name .. "<INFO>" .. ItemDatabase["Custom"].URL .. ItemID .. "</INFO></URL>")
+						AddItemIdentifiedDesc(ItemID, "^0000CCID:^000000 <URL>" .. ItemID .. "<INFO>" .. ItemDatabase["Custom"].URL .. ItemID .. "</INFO></URL>")
 					end
-				-- START Unify Item ID and Item Url
-					-- AddItemIdentifiedDesc(ItemID, "<URL>" .. Database.Name .. "<INFO>" .. Database.URL .. ItemID .. "</INFO></URL>")
-					AddItemIdentifiedDesc(ItemID, "^0000CCID:^000000 <URL>" .. ItemID .. "<INFO>" .. Database.URL .. ItemID .. "</INFO></URL>")
-				elseif DisplayCustomDB == true and DESC.Custom == true then
-					-- AddItemIdentifiedDesc(ItemID, "<URL>" .. ItemDatabase["Custom"].Name .. "<INFO>" .. ItemDatabase["Custom"].URL .. ItemID .. "</INFO></URL>")
-					AddItemIdentifiedDesc(ItemID, "^0000CCID:^000000 <URL>" .. ItemID .. "<INFO>" .. ItemDatabase["Custom"].URL .. ItemID .. "</INFO></URL>")
+					-- END Unify Item ID and Item Url
 				end
-				-- END Unify Item ID and Item Url
-			end
-		end 
+			end 
+		end
 		-- END Print Item ID first before other descriptions
 
 		for k, v in pairs(DESC.identifiedDescriptionName) do
@@ -122,12 +158,23 @@ function main()
 			AddItemIdentifiedDesc(ItemID, "________________________")
 			
 			-- START Read and Apply item annotations
-			if itemAnnotations ~= nil and itemAnnotations[ItemID] ~= nil and itemAnnotations[ItemID].descLines ~= nil then
-				for _, line in ipairs(itemAnnotations[ItemID].descLines) do
-					AddItemIdentifiedDesc(ItemID, line)
+			if itemAnnotationsEnabled then
+				if itemAnnotationsEnabled then
+					if itemAnnotations ~= nil and itemAnnotations[ItemID] ~= nil and itemAnnotations[ItemID].descLines ~= nil then
+						for _, line in ipairs(itemAnnotations[ItemID].descLines) do
+							AddItemIdentifiedDesc(ItemID, line)
+						end
+					end
 				end
 			end
 			-- END Read and Apply item annotations
+
+			if not itemAnnotationsEnabled then
+				if DisplayItemID == 2 then
+					AddItemIdentifiedDesc(ItemID, "^0000CCItem ID:^000000 "..ItemID)
+					-- AddItemIdentifiedDesc(ItemID, "^0000CCItem ID:^000000<URL>" ..ItemID .. "<INFO>" .. ItemDatabase["Custom"].URL .. ItemID .. "</INFO></URL>")
+				end
+			end
 
 			if DisplayServer == 3 and DESC.Server ~= nil and DESC.Custom == nil then
 				AddItemIdentifiedDesc(ItemID, "^0000CCServer: "..ServerColour..DESC.Server.."^000000")
@@ -135,6 +182,19 @@ function main()
 				AddItemIdentifiedDesc(ItemID, "^0000CCServer: "..CServerColour..CServerName.."^000000")
 			end
 
+			if not itemAnnotationsEnabled then
+				if DisplayDatabase == true or DisplayCustomDB == true then
+					if DisplayDatabase == true and DESC.Custom == nil then
+						local Database = ItemDatabase["Elegy"]
+						if DESC.Server ~= nil and ItemDatabase[DESC.Server] ~= nil then
+							Database = ItemDatabase[DESC.Server]
+						end
+						AddItemIdentifiedDesc(ItemID, "<URL>" .. Database.Name .. "<INFO>" .. Database.URL .. ItemID .. "</INFO></URL>")
+					elseif DisplayCustomDB == true and DESC.Custom == true then
+						AddItemIdentifiedDesc(ItemID, "<URL>" .. ItemDatabase["Custom"].Name .. "<INFO>" .. ItemDatabase["Custom"].URL .. ItemID .. "</INFO></URL>")
+					end
+				end
+			end 
 		end
 		if DESC.EffectID~= nil then
 			result, msg = AddItemEffectInfo(ItemID, DESC.EffectID)
